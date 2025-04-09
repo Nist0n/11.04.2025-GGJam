@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 246f628f540ddaf4aa4430aa18b55abd
+timeCreated: 1530012526
+licenseType: Store
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274837
+  packageName: F Texture Tools
+  packageVersion: 1.1.3
+  assetPath: Assets/FImpossible Creations/Editor/Editor Tools/F Texture Tools/ReadMe
+    - F Texture Tools.txt
+  uploadId: 740870

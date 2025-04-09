@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 56b1ff0747953e84daadcfeaed7d2353
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: df138d29309cc4740b1a02c0cf5bca7b, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274837
+  packageName: F Texture Tools
+  packageVersion: 1.1.3
+  assetPath: Assets/FImpossible Creations/Editor/Editor Tools/F Texture Tools/RGBA
+    Channel Tools/FChannelledGenerator.cs
+  uploadId: 740870
