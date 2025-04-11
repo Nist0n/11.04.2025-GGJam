@@ -7,11 +7,13 @@ namespace Environment
     {
         [SerializeField] private Trap trap;
 
-        private bool _isButtonActived = true;
+        [SerializeField] private float timeToActivateButton;
+        
+        private bool _isButtonActivated = true;
 
         private float _timer;
         
-        private float _timeToActivateButton = 10f;
+        
         
         private Animator _animator;
 
@@ -27,10 +29,10 @@ namespace Environment
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player") && _isButtonActived)
+            if (other.CompareTag("Player") && _isButtonActivated)
             {
                 _animator.Play("Push");
-                _isButtonActived = false;
+                _isButtonActivated = false;
                 _timer = 0;
                 trap.OnTrapButtonPush();
             }
@@ -38,13 +40,13 @@ namespace Environment
 
         private void ActivateButton()
         {
-            if (_timer < _timeToActivateButton && !_isButtonActived)
+            if (_timer < timeToActivateButton && !_isButtonActivated)
             {
                 _timer += Time.deltaTime;
             }
-            if (_timer > _timeToActivateButton && !_isButtonActived)
+            if (_timer > timeToActivateButton && !_isButtonActivated)
             {
-                _isButtonActived = true;
+                _isButtonActivated = true;
                 _animator.Play("UnPush");
             }
         }
