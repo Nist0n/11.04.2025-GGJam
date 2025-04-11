@@ -13,10 +13,18 @@ namespace Items
 
         [SerializeField] private float projectileSpeed;
         
+
         private float _timer;
 
         private bool _isSkillActive = true;
-        
+
+        private Camera _camera;
+
+        private void Start()
+        {
+            _camera = Camera.main;
+        }
+
         private void Update()
         {
             SkillCooldown();
@@ -28,7 +36,9 @@ namespace Items
             if (Input.GetMouseButtonUp(0) && _isSkillActive) // Left button
             {
                 GameObject temp = Instantiate(projectile, fromObj.position, Quaternion.identity, gameObject.transform);
-                temp.GetComponent<Rigidbody>().linearVelocity = -fromObj.forward * projectileSpeed;
+                Vector3 castDirection = _camera.transform.forward;
+                castDirection.x -= 0.05f;
+                temp.GetComponent<Rigidbody>().linearVelocity = castDirection * projectileSpeed;
                 _timer = 0;
                 _isSkillActive = false;
             }
