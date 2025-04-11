@@ -1,11 +1,11 @@
-using System;
 using Settings.Audio;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Settings
+namespace UI
 {
     public class MainMenu : MonoBehaviour
     {
@@ -34,7 +34,7 @@ namespace Settings
         private void PlayGame()
         {
             AudioManager.instance.PlaySfx("Click");
-            // SceneManager.LoadScene(1);
+            SceneManager.LoadScene(1);
             AudioManager.instance.StartMusicShuffle();
         }
 
@@ -43,6 +43,15 @@ namespace Settings
             AudioManager.instance.PlaySfx("Click");
             controlButtons.SetActive(!controlButtons.activeSelf);
             settingsUI.SetActive(!settingsUI.activeSelf);
+            
+            if (settingsUI.activeSelf)
+            {
+                EventSystem.current.SetSelectedGameObject(backButton.gameObject);    
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(playButton.gameObject);
+            }
         }
 
         private void ExitGame()
