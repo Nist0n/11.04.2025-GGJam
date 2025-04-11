@@ -776,6 +776,9 @@ MonoBehaviour:
   mouseSensitivity: 10
   jumpForce: 3
   sprintMultiplier: 1.5
+  dashSpeed: 30
+  dashTime: 0.25
+  dashCooldown: 2
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

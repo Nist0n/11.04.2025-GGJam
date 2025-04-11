@@ -485,10 +485,21 @@
                 {
                     "name": "",
                     "id": "391a835e-db27-4930-9d74-4fe0997e4b15",
-                    "path": "",
+                    "path": "<Keyboard>/leftAlt",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22c88960-001d-4497-a952-f3e0262aaa3e",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
