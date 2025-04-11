@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics.Geometry;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EventHandler = Static_Classes.EventHandler;
 
 namespace Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Controller : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         [SerializeField] private float walkSpeed;
         [SerializeField] private float mouseSensitivity;
@@ -16,7 +15,7 @@ namespace Player
         [SerializeField] private float dashSpeed;
         [SerializeField] private float dashTime;
         [SerializeField] private float dashCooldown;
-        
+
         private const float Gravity = -9.81f;
         
         private CharacterController _characterController;
