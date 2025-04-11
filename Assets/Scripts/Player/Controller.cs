@@ -6,9 +6,10 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class Controller : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed;
+        [SerializeField] private float walkSpeed;
         [SerializeField] private float mouseSensitivity;
         [SerializeField] private float jumpForce;
+        [SerializeField] private float sprintMultiplier;
         
         private const float Gravity = -9.81f;
         
@@ -22,10 +23,9 @@ namespace Player
         private InputAction _jumpAction;
         private InputAction _sprintAction;
         private InputAction _dashAction;
-
-        private Vector2 _rotation;
         
         private float _rotationX;
+        private float _moveSpeed;
         
         private void Start()
         {
@@ -61,6 +61,14 @@ namespace Player
         private void Move()
         {
             Vector2 moveValue = _moveAction.ReadValue<Vector2>();
+            if (_sprintAction.IsPressed() && moveValue is { y: > 0, x: 0 })
+            {
+                _moveSpeed = sprintMultiplier * walkSpeed;
+            }
+            else
+            {
+                _moveSpeed = walkSpeed;
+            }
             
             if (_characterController.isGrounded && _velocity.y < 0)
             {
@@ -68,7 +76,8 @@ namespace Player
             }
             
             Vector3 move = transform.right * moveValue.x + transform.forward * moveValue.y;
-            _characterController.Move(move * (moveSpeed * Time.deltaTime));
+            
+            _characterController.Move(move * (_moveSpeed * Time.deltaTime));
             
             if (_jumpAction.IsPressed() && _characterController.isGrounded)
             {
