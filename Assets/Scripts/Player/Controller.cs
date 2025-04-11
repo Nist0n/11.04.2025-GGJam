@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics.Geometry;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -10,6 +13,9 @@ namespace Player
         [SerializeField] private float mouseSensitivity;
         [SerializeField] private float jumpForce;
         [SerializeField] private float sprintMultiplier;
+        [SerializeField] private float dashSpeed;
+        [SerializeField] private float dashTime;
+        [SerializeField] private float dashCooldown;
         
         private const float Gravity = -9.81f;
         
@@ -17,6 +23,7 @@ namespace Player
         private Vector3 _velocity;
         private Transform _cameraTransform;
         private bool _grounded;
+        private bool _dashing;
         
         private InputAction _moveAction;
         private InputAction _lookAction;
@@ -86,6 +93,35 @@ namespace Player
             
             _velocity.y += Gravity * Time.deltaTime;
             _characterController.Move(_velocity * Time.deltaTime);
+
+            if (_dashAction.IsPressed() && !_dashing)
+            {
+                StartCoroutine(Dash());
+            }
+
+            IEnumerator Dash()
+            {
+                _dashing = true;
+                float startTime = Time.time;
+
+                while (Time.time < startTime + dashTime)
+                {
+                    Vector2 moveVector = _moveAction.ReadValue<Vector2>();
+                    Vector3 direction = new Vector3(moveVector.x, 0f, moveVector.y).normalized;
+                    if (direction.magnitude >= 0.1f)
+                    {
+                        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
+                        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                        
+                        _characterController.Move(moveDir * (dashSpeed * Time.deltaTime));
+                    }
+                    
+                    yield return null;
+                }
+                
+                yield return new WaitForSeconds(dashCooldown);
+                _dashing = false;
+            }
         }
     }
 }
