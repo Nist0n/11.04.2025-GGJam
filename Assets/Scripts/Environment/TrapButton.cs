@@ -1,4 +1,5 @@
 using System;
+using Settings.Audio;
 using UnityEngine;
 
 namespace Environment
@@ -30,6 +31,7 @@ namespace Environment
             if (other.CompareTag("Player") && _isButtonActive)
             {
                 _animator.Play("Push");
+                AudioManager.instance.PlaySfx("TileTrap");
                 _isButtonActive = false;
                 _timer = 0;
                 trap.OnTrapButtonPush();

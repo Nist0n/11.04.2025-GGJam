@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Settings.Audio;
 using UnityEngine;
 
 namespace Environment
@@ -10,6 +11,8 @@ namespace Environment
         public void OnTrapButtonPush()
         {
             GameObject projectile = Instantiate(fireball, transform);
+            
+            AudioManager.instance.PlaySfx("FireTrap");
 
             Vector3 newPos = projectile.transform.position;
             newPos.y += 10;
