@@ -97,7 +97,7 @@ namespace Bosses.Chest
         {
             IsSwitchingPhase = true;
             BossPhase = Phase.Second;
-            EventHandler.SecondPhaseAchieved?.Invoke();
+            GameEvents.SecondPhaseAchieved?.Invoke();
             idleTime = 1;
             minAttackDelay = 3;
             maxAttackDelay = 6;
@@ -131,7 +131,7 @@ namespace Bosses.Chest
         {
             if (other.CompareTag("Player"))
             {
-                EventHandler.PlayerDeath?.Invoke();
+                GameEvents.PlayerDeath?.Invoke();
                 _isGameLost = true;
             }
         }

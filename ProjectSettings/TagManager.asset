@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BossChest
   - Coin
+  - Projectile
   layers:
   - Default
   - TransparentFX

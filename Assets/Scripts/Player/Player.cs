@@ -2,9 +2,9 @@
 using System.Collections;
 using Bosses.Chest;
 using Items;
+using Static_Classes;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using EventHandler = Static_Classes.EventHandler;
 
 namespace Player
 {
@@ -69,12 +69,12 @@ namespace Player
 
         private void OnDisable()
         {
-            EventHandler.PlayerDeath -= SetOnPlayerDeath;
+            GameEvents.PlayerDeath -= SetOnPlayerDeath;
         }
 
         private void OnEnable()
         {
-            EventHandler.PlayerDeath += SetOnPlayerDeath;
+            GameEvents.PlayerDeath += SetOnPlayerDeath;
         }
 
         private void Look()

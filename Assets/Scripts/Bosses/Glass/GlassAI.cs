@@ -8,8 +8,12 @@ namespace Bosses.Glass
 {
     public class GlassAI : AI.BehaviourTree.Base.BehaviourTree
     {
+        [SerializeField] private float health;
+        
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform targetTransform;
+        [SerializeField] private GameObject projectile;
+        
         [SerializeField] private float avoidDistance;
         
         private Node _rootNode;
@@ -31,7 +35,11 @@ namespace Bosses.Glass
             
             root.SetChildren(new List<Node>
             {
-                new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance)
+                new Sequence(new List<Node>
+                {
+                    new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
+                    new TaskShoot(_transform, playerTransform, 1f, 6, 2f, projectile)
+                }),
             }, forceRoot: true);
 
             return root;
