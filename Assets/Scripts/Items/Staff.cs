@@ -1,4 +1,5 @@
 using System;
+using Bosses;
 using UnityEngine;
 
 namespace Items
@@ -35,10 +36,7 @@ namespace Items
         {
             if (Input.GetMouseButtonUp(0) && _isSkillActive) // Left button
             {
-                GameObject temp = Instantiate(projectile, fromObj.position, Quaternion.identity, gameObject.transform);
-                Vector3 castDirection = _camera.transform.forward;
-                castDirection.x -= 0.05f;
-                temp.GetComponent<Rigidbody>().linearVelocity = castDirection * projectileSpeed;
+                ShootProjectile();
                 _timer = 0;
                 _isSkillActive = false;
             }
@@ -54,6 +52,18 @@ namespace Items
             {
                 _isSkillActive = true;
             }
+        }
+        
+        private void ShootProjectile()
+        {
+            Vector3 castDirection = _camera.transform.forward;
+            castDirection.x -= 0.05f;
+            
+            var projectile = Instantiate(
+                this.projectile, 
+                fromObj.transform.position, 
+                Quaternion.LookRotation(castDirection));
+            projectile.GetComponent<Projectile>().SetDirection(castDirection);
         }
     }
 }
