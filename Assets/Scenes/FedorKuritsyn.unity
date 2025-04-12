@@ -943,6 +943,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5312057889978184973, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
+      propertyPath: jumpForce
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6868197866487742622, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -987,8 +991,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7077917257895891234, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1002,20 +1005,84 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2454660316792023221, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
-      propertyPath: m_IsTrigger
+      propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 903b8f30ca337514692dedd69b71a200, type: 2}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime1
+      value: 65342
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0.0055885315
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 0.2095
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.20126343
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196503449293781340, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.49685332
       objectReference: {fileID: 0}
     - target: {fileID: 4769368594105969758, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: m_Name
       value: Boss (Glass)
       objectReference: {fileID: 0}
     - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
-      propertyPath: dashSpeed
-      value: 50
-      objectReference: {fileID: 0}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 6127698344145723181, guid: 2cad9b3ebcdfd464ba3d3511c2cc0d9c, type: 3}
     - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
-      propertyPath: dashDuration
-      value: 0.35
+      propertyPath: rotationSpeed
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: playerTransform
@@ -1064,6 +1131,10 @@ PrefabInstance:
     - target: {fileID: 6803816800438307763, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827871408366015731, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
