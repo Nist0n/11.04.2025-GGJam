@@ -62,7 +62,7 @@ namespace Bosses.Glass.BehaviourTree
 
         private void HandlePreparation()
         {
-            _agent.baseOffset = 0.5f;
+            _agent.baseOffset = 0;
             if (_bossTransform.position.y > _groundLevel + 0.1f)
             {
                 _bossTransform.position -= Vector3.up * (_descentSpeed * Time.deltaTime);
@@ -102,7 +102,7 @@ namespace Bosses.Glass.BehaviourTree
                 _stateTimer = _cooldownTime;
                 _lineRenderer.enabled = false;
                 _agent.isStopped = false;
-                _agent.baseOffset = 0.75f;
+                _agent.baseOffset = 0.77f;
             }
             
             _stateTimer -= Time.deltaTime;
@@ -132,7 +132,7 @@ namespace Bosses.Glass.BehaviourTree
 
             Vector3 laserStartPos = new Vector3(
                 _bossTransform.position.x,
-                _bossTransform.position.y - 0.7f,
+                _bossTransform.position.y + 0.2f,
                 _bossTransform.position.z
             );
             _lineRenderer.SetPosition(0, laserStartPos);
