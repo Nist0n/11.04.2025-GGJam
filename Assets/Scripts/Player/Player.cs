@@ -2,6 +2,7 @@
 using System.Collections;
 using Bosses.Chest;
 using Items;
+using Settings.Audio;
 using Static_Classes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +19,9 @@ namespace Player
         [SerializeField] private float dashSpeed;
         [SerializeField] private float dashTime;
         [SerializeField] private float dashCooldown;
+        [SerializeField] private AudioSource steps;
+        [SerializeField] private AudioSource run;
+        
 
         private const float Gravity = -9.81f;
         
@@ -39,7 +43,11 @@ namespace Player
         private float _moveSpeed;
         private Chest _chest;
 
-        private void SetOnPlayerDeath() => _isGameLost = true;
+        private void SetOnPlayerDeath()
+        {
+            _isGameLost = true;
+            AudioManager.instance.PlaySfx("Die");
+        }
         
         private void Start()
         {
@@ -98,15 +106,25 @@ namespace Player
             if (_sprintAction.IsPressed() && moveValue is { y: > 0, x: 0 })
             {
                 _moveSpeed = sprintMultiplier * walkSpeed;
+                run.enabled = true;
+                steps.enabled = false;
             }
             else
             {
                 _moveSpeed = walkSpeed;
+                run.enabled = false;
+                steps.enabled = true;
             }
             
             if (_characterController.isGrounded && _velocity.y < 0)
             {
                 _velocity.y = -2f;
+            }
+
+            if (moveValue.x == 0 && moveValue.y == 0)
+            {
+                run.enabled = false;
+                steps.enabled = false;
             }
             
             Vector3 move = transform.right * moveValue.x + transform.forward * moveValue.y;
@@ -115,6 +133,7 @@ namespace Player
             
             if (_jumpAction.IsPressed() && _characterController.isGrounded)
             {
+                AudioManager.instance.PlaySfx("PlayerJump");
                 _velocity.y = jumpForce;
             }
             
@@ -129,6 +148,7 @@ namespace Player
             IEnumerator Dash()
             {
                 _dashing = true;
+                AudioManager.instance.PlaySfx("Dash");
                 float startTime = Time.time;
 
                 while (Time.time < startTime + dashTime)
