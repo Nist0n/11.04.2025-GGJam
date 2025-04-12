@@ -20,6 +20,7 @@ namespace Bosses.Glass
         [SerializeField] private float avoidDistance;
         [SerializeField] private float dashSpeed;
         [SerializeField] private float dashDuration;
+        [SerializeField] private float rotationSpeed;
         
         private Node _rootNode;
 
@@ -36,14 +37,23 @@ namespace Bosses.Glass
         protected override Node SetupTree()
         {
             _agent = GetComponent<NavMeshAgent>();
+            LineRenderer lineRenderer = GetComponent<LineRenderer>();
+            
             _transform = transform;
             
             Node root = new Selector();
 
+            LaserController laserController = new LaserController(_transform, rotationSpeed, lineRenderer, _agent);
+            
             Node phaseOne = new Sequence(new List<Node>
             {
                 new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
-                new TaskAttack(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile, dashSpeed, dashDuration, _currentPhase)
+                new TaskAttack(_transform, playerTransform,
+                    intervalBetweenShots, projectileCount,
+                    waveCooldown, projectile,
+                    dashSpeed, dashDuration,
+                    _currentPhase, laserController
+                    )
             });
 
             Node phaseTwo = new Sequence(new List<Node>
@@ -52,7 +62,8 @@ namespace Bosses.Glass
                 new TaskAttack(_transform, playerTransform,
                     intervalBetweenShots - 0.05f, projectileCount * 2,
                     waveCooldown - 1, projectile,
-                    dashSpeed * 1.5f, dashDuration - 0.1f, _currentPhase
+                    dashSpeed * 1.5f, dashDuration - 0.1f,
+                    _currentPhase, laserController
                     )
             });
 

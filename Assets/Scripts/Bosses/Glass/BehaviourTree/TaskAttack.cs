@@ -25,7 +25,7 @@ namespace Bosses.Glass.BehaviourTree
                           float attackInterval, int projectileCount,
                           float waveCooldown, GameObject projectile,
                           float dashSpeed, float dashDuration,
-                          int currentPhase
+                          int currentPhase, LaserController laserController
                           )
         {
             _transform = transform;
@@ -35,6 +35,7 @@ namespace Bosses.Glass.BehaviourTree
             _waveCooldown = waveCooldown;
             _projectile = projectile;
             _currentPhase = currentPhase;
+            _laserController = laserController;
             
             LayerMask wallMask = LayerMask.GetMask("Wall");
             _dashController = new BossDashController(_transform, wallMask, dashSpeed, dashDuration);
@@ -65,14 +66,15 @@ namespace Bosses.Glass.BehaviourTree
 
         private void Laser()
         {
-            if (_currentPhase == 1)
-            {
-                return;
-            }
-            
+            // if (_currentPhase == 1)
+            // {
+            //     return;
+            // }
+            Debug.Log("lasering");
             if (!_laserController.isLasering())
             {
                 _laserController.StartLasering();
+                
             }
             
             _laserController.UpdateLasering();
