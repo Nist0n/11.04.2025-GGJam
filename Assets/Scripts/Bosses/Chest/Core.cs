@@ -7,6 +7,8 @@ namespace Bosses.Chest
 {
     public abstract class Core : MonoBehaviour
     {
+        public GameObject ProjectilePrefab;
+        
         public Coin CoinPrefab;
 
         public int MinCoinsToDrop = 3;

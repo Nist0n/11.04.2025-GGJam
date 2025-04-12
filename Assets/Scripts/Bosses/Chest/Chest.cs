@@ -24,6 +24,8 @@ namespace Bosses.Chest
         {
             Player = GameObject.FindGameObjectWithTag("Player");
             
+            Debug.Log(PlayerPrefs.GetInt("SecondPhaseStart"));
+            
             if (PlayerPrefs.GetInt("SecondPhaseStart") == 1)
             {
                 Health = MaxHealth / 2;
@@ -45,7 +47,6 @@ namespace Bosses.Chest
                 Set(Idle);
                 return;
             }
-            Debug.Log(State);
             
             Health = Mathf.Clamp(Health, 0, MaxHealth);
             
@@ -59,6 +60,7 @@ namespace Bosses.Chest
             if (IsSwitchingPhase)
             {
                 Set(SwitchingPhase);
+                State.DoBranch();
                 return;
             }
             

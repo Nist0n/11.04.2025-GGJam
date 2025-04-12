@@ -20,7 +20,7 @@ namespace Bosses
             _direction = direction.normalized;
         }
         
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("BossGlass") || other.gameObject.CompareTag("Projectile"))
             {

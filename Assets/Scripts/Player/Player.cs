@@ -43,7 +43,10 @@ namespace Player
         
         private void Start()
         {
-            // _chest = GameObject.FindGameObjectWithTag("BossChest").GetComponent<Chest>();
+            if (GameObject.FindGameObjectWithTag("BossChest"))
+            {
+                _chest = GameObject.FindGameObjectWithTag("BossChest").GetComponent<Chest>();
+            }
             
             _characterController = GetComponent<CharacterController>();
             
@@ -163,7 +166,7 @@ namespace Player
             
             yield return coin.Pickup();
             
-            Destroy(coin);
+            coin.DestroyCoin();
 
             _isTakingCoin = false;
         }
