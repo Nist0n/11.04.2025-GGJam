@@ -450,6 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8e627d607eea54982b650e6a4b613e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 8159842180215337990, guid: 849fd6730ef42334da99761797029ff2, type: 3}
   CoinPrefab: {fileID: 6114226937289165281, guid: 89a3fa15de30c4f4a8ffb5322553e033, type: 3}
   MinCoinsToDrop: 3
   MaxCoinsToDrop: 6
@@ -844,6 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b4e1654e623a347b3ec64d394f9abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToPhase2: 7
 --- !u!4 &1584149255
 Transform:
   m_ObjectHideFlags: 0

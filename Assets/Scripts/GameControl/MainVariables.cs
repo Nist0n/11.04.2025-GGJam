@@ -18,7 +18,10 @@ namespace GameControl
 
         private void Awake()
         {
-            PlayerPrefs.SetInt("SecondPhaseStart", 0);
+            if (!PlayerPrefs.HasKey("SecondPhaseStart"))
+            {
+                PlayerPrefs.SetInt("SecondPhaseStart", 0);
+            }
             PlayerPrefs.SetInt("SecondPhaseAchieved", 0);
             
             if (_instance == null)

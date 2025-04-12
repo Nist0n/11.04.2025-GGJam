@@ -116,6 +116,11 @@ namespace Bosses.Chest.States
                 coins[i] = Instantiate(Core.CoinPrefab, point,
                     Quaternion.Euler(0, Random.Range(0, 360), 0));
 
+                if (Core.BossPhase == Phase.Second)
+                {
+                    coins[i].ChooseTheCoinType();
+                }
+
                 coinsSpawnAnimations[i] = AnimateSpawnFor(coins[i]);
             }
 

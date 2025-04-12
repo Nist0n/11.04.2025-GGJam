@@ -162,7 +162,14 @@ namespace Player
 
         private IEnumerator PickupCoin(Coin coin)
         {
-            _chest.ReceiveDamage();
+            if (!coin.InFire)
+            {
+                _chest.ReceiveDamage();
+            }
+            else
+            {
+                GameEvents.PlayerDeath?.Invoke();
+            }
             
             yield return coin.Pickup();
             

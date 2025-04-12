@@ -23,7 +23,6 @@ namespace Bosses.Chest.States
             {
                 _timerToPhase2 += Time.deltaTime;
                 _timerToShoot += Time.deltaTime;
-                Debug.Log(_timerToShoot - Time.deltaTime);
                 if (_timerToShoot - Time.deltaTime >= 1)
                 {
                     ShootProjectile(Core.Player.transform.position);

@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Items
 {
@@ -9,6 +10,12 @@ namespace Items
         private float _timer;
 
         private float _timeToDeath = 5f;
+
+        [SerializeField] private GameObject fireEffect;
+
+        public bool InFire;
+
+        private int _rand;
         
         public YieldInstruction Pickup()
         {
@@ -35,6 +42,20 @@ namespace Items
         public void DestroyCoin()
         {
             Destroy(gameObject);
+        }
+
+        public void ChooseTheCoinType()
+        {
+            _rand = Random.Range(0, 3);
+            if (_rand == 0)
+            {
+                InFire = false;
+            }
+            else
+            {
+                InFire = true;
+                fireEffect.SetActive(true);
+            }
         }
     }
 }

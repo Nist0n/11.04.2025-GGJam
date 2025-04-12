@@ -24,8 +24,6 @@ namespace Bosses.Chest
         {
             Player = GameObject.FindGameObjectWithTag("Player");
             
-            Debug.Log(PlayerPrefs.GetInt("SecondPhaseStart"));
-            
             if (PlayerPrefs.GetInt("SecondPhaseStart") == 1)
             {
                 Health = MaxHealth / 2;
@@ -100,6 +98,8 @@ namespace Bosses.Chest
             IsSwitchingPhase = true;
             BossPhase = Phase.Second;
             GameEvents.SecondPhaseAchieved?.Invoke();
+            MinCoinsToDrop = 5;
+            MaxCoinsToDrop = 9;
             idleTime = 1;
             minAttackDelay = 3;
             maxAttackDelay = 6;
