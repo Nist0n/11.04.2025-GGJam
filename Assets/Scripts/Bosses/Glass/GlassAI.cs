@@ -15,6 +15,9 @@ namespace Bosses.Glass
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform targetTransform;
         [SerializeField] private GameObject projectile;
+        [SerializeField] private float intervalBetweenShots;
+        [SerializeField] private int projectileCount;
+        [SerializeField] private float waveCooldown;
         
         [SerializeField] private float avoidDistance;
         
@@ -34,14 +37,17 @@ namespace Bosses.Glass
             _transform = transform;
             
             Node root = new Selector();
+
+            Node phaseOne = new Sequence(new List<Node>
+            {
+                new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
+                new TaskShoot(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile)
+                // Charge
+            });
             
             root.SetChildren(new List<Node>
             {
-                new Sequence(new List<Node>
-                {
-                    new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
-                    new TaskShoot(_transform, playerTransform, 0.15f, 6, 2f, projectile)
-                }),
+                phaseOne
             }, forceRoot: true);
 
             return root;

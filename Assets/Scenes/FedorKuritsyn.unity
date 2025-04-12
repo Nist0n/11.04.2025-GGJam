@@ -2021,13 +2021,25 @@ PrefabInstance:
       value: BossGlass
       objectReference: {fileID: 0}
     - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: waveCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 834854560}
     - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: projectileCount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 197172811}
+    - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: intervalBetweenShots
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 6803816800438307763, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
