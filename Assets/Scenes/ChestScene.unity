@@ -368,6 +368,10 @@ PrefabInstance:
       propertyPath: sounds.Array.data[9].name
       value: RandomChestSound2
       objectReference: {fileID: 0}
+    - target: {fileID: 6911663351984199583, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8382585116806453342, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 546.5013

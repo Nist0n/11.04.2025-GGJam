@@ -1,3 +1,4 @@
+using System.Collections;
 using Bosses.Chest.States;
 using Settings.Audio;
 using Static_Classes;
@@ -23,6 +24,8 @@ namespace Bosses.Chest
         
         private void Start()
         {
+            StartCoroutine(PlayBattleMusic());
+            
             Player = GameObject.FindGameObjectWithTag("Player");
             
             if (PlayerPrefs.GetInt("SecondPhaseStart") == 1)
@@ -141,6 +144,13 @@ namespace Bosses.Chest
                 AudioManager.instance.PlaySfx("RandomChestSound2");
                 _isGameLost = true;
             }
+        }
+
+        private IEnumerator PlayBattleMusic()
+        {
+            AudioManager.instance.PlayMusic("ChestOpening");
+            yield return new WaitForSeconds(17);
+            AudioManager.instance.PlayMusic("ChestLoop");
         }
     }
 }
