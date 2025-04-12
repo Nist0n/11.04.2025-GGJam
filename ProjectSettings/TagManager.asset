@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Undefined
   - BossGlass
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Boss
   - Player
   - Projectile
-  - 
+  - Wall
   - 
   - 
   - 

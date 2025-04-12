@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AI.BehaviourTree.Base;
 using Bosses.Glass.BehaviourTree;
 using Static_Classes;
@@ -35,14 +34,15 @@ namespace Bosses.Glass
         {
             _agent = GetComponent<NavMeshAgent>();
             _transform = transform;
+            LayerMask wallMask = LayerMask.GetMask("Wall");
+            BossDashController bossDashController = new BossDashController(_transform, wallMask);
             
             Node root = new Selector();
 
             Node phaseOne = new Sequence(new List<Node>
             {
                 new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
-                new TaskShoot(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile)
-                // Charge
+                new TaskAttack(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile, bossDashController)
             });
             
             root.SetChildren(new List<Node>
@@ -62,6 +62,7 @@ namespace Bosses.Glass
         {
             if (other.gameObject.CompareTag("Player"))
             {
+                Debug.Log("Boss hit player");
                 GameEvents.PlayerDeath?.Invoke();
             }
         }

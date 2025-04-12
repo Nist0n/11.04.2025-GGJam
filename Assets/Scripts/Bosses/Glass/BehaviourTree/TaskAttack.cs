@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Bosses.Glass.BehaviourTree
 {
-    public class TaskShoot : Node
+    public class TaskAttack : Node
     {
         private Transform _transform;
         private Transform _playerTransform;
@@ -12,11 +12,13 @@ namespace Bosses.Glass.BehaviourTree
         private float _waveCooldown;
         private GameObject _projectile;
 
+        private BossDashController _dashController;
+
         private float _nextWaveTime;
         private int _projectilesFiredInCurrentWave;
         private float _nextProjectileTime;
         
-        public TaskShoot(Transform transform, Transform playerTransform, float attackInterval, int projectileCount, float waveCooldown, GameObject projectile)
+        public TaskAttack(Transform transform, Transform playerTransform, float attackInterval, int projectileCount, float waveCooldown, GameObject projectile, BossDashController dashController)
         {
             _transform = transform;
             _playerTransform = playerTransform;
@@ -24,11 +26,40 @@ namespace Bosses.Glass.BehaviourTree
             _projectileCount = projectileCount;
             _waveCooldown = waveCooldown;
             _projectile = projectile;
+            _dashController = dashController;
         }
 
         public override NodeState Evaluate()
         {
             _state = NodeState.Running;
+            _dashController.UpdateDash();
+            if (_dashController.currentState is DashState.Ready or DashState.Cooldown)
+            {
+                int r = Random.Range(0, 5);
+                if (r == 0)
+                {
+                    Charge();
+                }
+                else
+                {
+                    ShootWave();
+                }
+            }
+            return _state;
+        }
+
+        private void Charge()
+        {
+            if (!_dashController.IsDashing())
+            {
+                _dashController.StartDash(_playerTransform.position);
+            }
+            
+            _dashController.UpdateDash();
+        }
+
+        private void ShootWave()
+        {
             if (Time.time >= _nextWaveTime && _projectilesFiredInCurrentWave >= _projectileCount)
             {
                 _projectilesFiredInCurrentWave = 0;
@@ -47,9 +78,8 @@ namespace Bosses.Glass.BehaviourTree
                     _nextWaveTime = Time.time + _waveCooldown;
                 }
             }
-            return _state;
         }
-        
+
         private void ShootProjectile(Vector3 targetPosition)
         {
             // Рассчитываем направление к игроку
