@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AI.BehaviourTree.Base;
 using Bosses.Glass.BehaviourTree;
+using Static_Classes;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,7 +40,7 @@ namespace Bosses.Glass
                 new Sequence(new List<Node>
                 {
                     new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
-                    new TaskShoot(_transform, playerTransform, 1f, 6, 2f, projectile)
+                    new TaskShoot(_transform, playerTransform, 0.15f, 6, 2f, projectile)
                 }),
             }, forceRoot: true);
 
@@ -48,6 +50,14 @@ namespace Bosses.Glass
         private void Update()
         {
             _rootNode.Evaluate();
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                GameEvents.PlayerDeath?.Invoke();
+            }
         }
     }
 }

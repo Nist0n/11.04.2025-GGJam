@@ -28,6 +28,7 @@ namespace Bosses.Glass.BehaviourTree
             _agent.SetDestination(_targetTransform.position);
             
             Vector3 directionToPlayer = _playerTransform.position - _transform.position;
+            // _transform.Rotate(directionToPlayer.x, 0, directionToPlayer.z);
             float sqrDistance = Vector3.SqrMagnitude(directionToPlayer);
             if (sqrDistance < Mathf.Pow(_avoidDistance, 2))
             {

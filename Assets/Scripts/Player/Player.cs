@@ -43,7 +43,7 @@ namespace Player
         
         private void Start()
         {
-            _chest = GameObject.FindGameObjectWithTag("BossChest").GetComponent<Chest>();
+            // _chest = GameObject.FindGameObjectWithTag("BossChest").GetComponent<Chest>();
             
             _characterController = GetComponent<CharacterController>();
             

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using AI.BehaviourTree.Base;
+﻿using AI.BehaviourTree.Base;
 using UnityEngine;
 
 namespace Bosses.Glass.BehaviourTree
@@ -9,19 +8,15 @@ namespace Bosses.Glass.BehaviourTree
         private Transform _transform;
         private Transform _playerTransform;
         private float _attackInterval;
-        private float _projectileCount;
+        private int _projectileCount;
         private float _waveCooldown;
         private GameObject _projectile;
 
-        private const float ProjectileSpeed = 0.5f;
-
-        private bool _canShootWave;
-        private float _timer;
-
-        private bool _canShootOnce;
-        private float _waveTimer = 1;
+        private float _nextWaveTime;
+        private int _projectilesFiredInCurrentWave;
+        private float _nextProjectileTime;
         
-        public TaskShoot(Transform transform, Transform playerTransform, float attackInterval, float projectileCount, float waveCooldown, GameObject projectile)
+        public TaskShoot(Transform transform, Transform playerTransform, float attackInterval, int projectileCount, float waveCooldown, GameObject projectile)
         {
             _transform = transform;
             _playerTransform = playerTransform;
@@ -34,47 +29,39 @@ namespace Bosses.Glass.BehaviourTree
         public override NodeState Evaluate()
         {
             _state = NodeState.Running;
-            if (_canShootWave)
+            if (Time.time >= _nextWaveTime && _projectilesFiredInCurrentWave >= _projectileCount)
             {
-                // shot a wave of projectiles towards the player
-                int i = 0;
-                while (i < _projectileCount)
-                {
-                    Debug.Log(_canShootOnce);
-                    if (_canShootOnce)
-                    {
-                        Debug.Log("Can shoot one projectile");
-                        // shoot one projectile
-                        var shot = Object.Instantiate(_projectile, _transform.position, Quaternion.identity, _transform);
-                        Vector3 dir = _playerTransform.position - _transform.position;
-                        shot.GetComponent<Rigidbody>().linearVelocity = dir * ProjectileSpeed;
-                        i++;
-                        _canShootOnce = false;
-                    }
-                    else
-                    {
-                        _waveTimer -= Time.deltaTime;
-                        if (_waveTimer <= 0)
-                        {
-                            _waveTimer = _attackInterval;
-                            _canShootOnce = true;
-                        }
-                    }
-                }
-                
-                _canShootWave = false;
+                _projectilesFiredInCurrentWave = 0;
+                _nextWaveTime = Time.time + _waveCooldown;
             }
-            else
+            
+            if (_projectilesFiredInCurrentWave < _projectileCount && Time.time >= _nextProjectileTime)
             {
-                _timer -= Time.deltaTime;
-                if (_timer <= 0)
+                ShootProjectile(_playerTransform.position);
+                _projectilesFiredInCurrentWave++;
+                _nextProjectileTime = Time.time + _attackInterval;
+            
+                // Если волна завершена, устанавливаем время для следующей волны
+                if (_projectilesFiredInCurrentWave >= _projectileCount)
                 {
-                    _timer = _waveCooldown;
-                    _canShootWave = true;
+                    _nextWaveTime = Time.time + _waveCooldown;
                 }
             }
-
             return _state;
+        }
+        
+        private void ShootProjectile(Vector3 targetPosition)
+        {
+            // Рассчитываем направление к игроку
+            Vector3 direction = (targetPosition - _transform.position).normalized;
+        
+            // Создаем снаряд
+            var projectile = Object.Instantiate(
+                _projectile, 
+                _transform.position, 
+                Quaternion.LookRotation(direction));
+            Projectile projectileScript = projectile.GetComponent<Projectile>();
+            projectileScript.SetDirection(direction);
         }
     }
 }

@@ -2016,6 +2016,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss (Glass)
       objectReference: {fileID: 0}
+    - target: {fileID: 4769368594105969758, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_TagString
+      value: BossGlass
+      objectReference: {fileID: 0}
     - target: {fileID: 6526111179475132325, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: playerTransform
       value: 
@@ -2030,7 +2034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6803816800438307763, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 2.69
       objectReference: {fileID: 0}
     - target: {fileID: 6803816800438307763, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2063,6 +2067,14 @@ PrefabInstance:
     - target: {fileID: 6803816800438307763, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827871408366015731, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_Height
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827871408366015731, guid: 90c6e1b2bb0c008448d7b5e5aacdc962, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
