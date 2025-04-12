@@ -6,12 +6,12 @@ namespace Bosses.Chest.States
     {
         public override void Enter()
         {
-            
+            //Core.BossAnimator.SetBool("IsMoving", false);
         }
     
         public override void Do()
         {
-            
+            IsComplete = true;
         }
     
         public override void Exit()

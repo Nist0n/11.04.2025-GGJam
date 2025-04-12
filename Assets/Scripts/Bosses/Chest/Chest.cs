@@ -5,9 +5,12 @@ namespace Bosses.Chest
 {
     public class Chest : Core
     {
-        [SerializeField] private float idleTime;
-
-        private float _idleTimer;
+        [SerializeField] private float idleTime = 3f;
+        [SerializeField] private float minAttackDelay = 7f;
+        [SerializeField] private float maxAttackDelay = 15f;
+        
+        private float _nextAttackTime;
+        private float _nextAttackTimer;
         
         public IdleState Idle;
         public FollowingState Following;
@@ -20,42 +23,48 @@ namespace Bosses.Chest
             Health = MaxHealth;
             SetupInstances();
             Set(Idle);
+            SetNextAttackTime();
         }
         
         private void Update()
         {
-            Health = Mathf.Clamp(Health, 0, MaxHealth);
-
             if (IsSwitchingPhase)
             {
                 Set(SwitchingPhase);
+                return;
+            }
+            
+            if (_nextAttackTimer >= _nextAttackTime && !IsAttacking && IsGrounded())
+            {
+                IsAttacking = true;
+                SetNextAttackTime();
+            }
+            else if (!IsAttacking)
+            {
+                _nextAttackTimer += Time.deltaTime;
             }
             
             if (State.IsComplete)
             {
-                if (IsAttacking)
+                if (IdleTimer <= idleTime)
+                {
+                    IdleTimer += Time.deltaTime;
+                    Set(Idle);
+                }
+                else if (IsAttacking)
                 {
                     Set(Attacking);
                 }
                 else
                 {
-                    if (_idleTimer <= idleTime)
-                    {
-                        _idleTimer += Time.deltaTime;
-                        Set(Idle);
-                    }
-                    else
-                    {
-                        Set(Following);
-                        _idleTimer = 0;
-                    }
+                    Set(Following);
+                    IdleTimer = 0;
                 }
             }
-
+            
             if (Health <= 0)
             {
                 Set(Death);
-                //Invoke(nameof(KillBoss), 1f);
             }
             
             State.DoBranch();
@@ -64,6 +73,12 @@ namespace Bosses.Chest
         private void FixedUpdate()
         {
             State.FixedDoBranch();
+        }
+        
+        private void SetNextAttackTime()
+        {
+            _nextAttackTime = Random.Range(minAttackDelay, maxAttackDelay);
+            _nextAttackTimer = 0;
         }
     }
 }
