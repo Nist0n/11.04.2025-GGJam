@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Items
@@ -16,6 +17,8 @@ namespace Items
         public bool InFire;
 
         private int _rand;
+
+        public bool IsDestroying;
         
         public YieldInstruction Pickup()
         {
@@ -29,6 +32,11 @@ namespace Items
 
         private void Update()
         {
+            if (IsDestroying)
+            {
+                return;
+            }
+            
             if (_timer <= _timeToDeath)
             {
                 _timer += Time.deltaTime;

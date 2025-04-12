@@ -4958,7 +4958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffcb86d3e8d6af45baee22dc471bfc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireEffect: {fileID: 0}
+  fireEffect: {fileID: 749919392943546577}
   InFire: 0
 --- !u!54 &2265974497839657094
 Rigidbody:

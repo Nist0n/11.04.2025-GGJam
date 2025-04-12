@@ -171,6 +171,8 @@ namespace Player
                 GameEvents.PlayerDeath?.Invoke();
             }
             
+            coin.IsDestroying = true;
+            
             yield return coin.Pickup();
             
             coin.DestroyCoin();
