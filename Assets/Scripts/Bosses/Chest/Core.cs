@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using EventHandler = Static_Classes.EventHandler;
 
 namespace Bosses.Chest
 {
@@ -36,11 +38,6 @@ namespace Bosses.Chest
         public GameObject Player;
     
         public BossState State => Machine.State;
-
-        private void Start()
-        {
-            Player = GameObject.FindGameObjectWithTag("Player");
-        }
 
         protected void Set(BossState newState, bool forceReset = false)
         {

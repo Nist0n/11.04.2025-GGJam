@@ -11,6 +11,7 @@ namespace Bosses.Chest.States
     
         public override void Do()
         {
+            Debug.Log(Core.IsGrounded());
             if (Core.IsGrounded())
             {
                 JumpTowardsPlayer();

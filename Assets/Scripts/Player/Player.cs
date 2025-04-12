@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using EventHandler = Static_Classes.EventHandler;
@@ -23,6 +24,7 @@ namespace Player
         private Transform _cameraTransform;
         private bool _grounded;
         private bool _dashing;
+        private bool _isGameLost;
         
         private InputAction _moveAction;
         private InputAction _lookAction;
@@ -32,6 +34,8 @@ namespace Player
         
         private float _rotationX;
         private float _moveSpeed;
+
+        private void SetOnPlayerDeath() => _isGameLost = true;
         
         private void Start()
         {
@@ -48,8 +52,23 @@ namespace Player
 
         private void Update()
         {
+            if (_isGameLost)
+            {
+                return;
+            }
+            
             Look();
             Move();
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.PlayerDeath -= SetOnPlayerDeath;
+        }
+
+        private void OnEnable()
+        {
+            EventHandler.PlayerDeath += SetOnPlayerDeath;
         }
 
         private void Look()

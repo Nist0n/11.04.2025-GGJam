@@ -1,4 +1,5 @@
 using Bosses.Chest.States;
+using Static_Classes;
 using UnityEngine;
 
 namespace Bosses.Chest
@@ -11,6 +12,7 @@ namespace Bosses.Chest
         
         private float _nextAttackTime;
         private float _nextAttackTimer;
+        private bool _isGameLost = false;
         
         public IdleState Idle;
         public FollowingState Following;
@@ -20,7 +22,17 @@ namespace Bosses.Chest
         
         private void Start()
         {
-            Health = MaxHealth;
+            Player = GameObject.FindGameObjectWithTag("Player");
+            
+            if (PlayerPrefs.GetInt("SecondPhaseStart") == 1)
+            {
+                Health = MaxHealth / 2;
+                StartSecondPhase();
+            }
+            else
+            {
+                Health = MaxHealth;
+            }
             SetupInstances();
             Set(Idle);
             SetNextAttackTime();
@@ -28,20 +40,26 @@ namespace Bosses.Chest
         
         private void Update()
         {
+            if (_isGameLost)
+            {
+                Set(Idle);
+                return;
+            }
+            Debug.Log(State);
+            
+            Health = Mathf.Clamp(Health, 0, MaxHealth);
+            
+            CheckNextAttackTimer();
+
+            if (Health <= MaxHealth / 2 && BossPhase == Phase.First)
+            {
+                StartSecondPhase();
+            }
+            
             if (IsSwitchingPhase)
             {
                 Set(SwitchingPhase);
                 return;
-            }
-            
-            if (_nextAttackTimer >= _nextAttackTime && !IsAttacking && IsGrounded())
-            {
-                IsAttacking = true;
-                SetNextAttackTime();
-            }
-            else if (!IsAttacking)
-            {
-                _nextAttackTimer += Time.deltaTime;
             }
             
             if (State.IsComplete)
@@ -74,11 +92,43 @@ namespace Bosses.Chest
         {
             State.FixedDoBranch();
         }
+
+        private void StartSecondPhase()
+        {
+            IsSwitchingPhase = true;
+            BossPhase = Phase.Second;
+            EventHandler.SecondPhaseAchieved?.Invoke();
+            idleTime = 1;
+            minAttackDelay = 3;
+            maxAttackDelay = 6;
+        }
         
         private void SetNextAttackTime()
         {
             _nextAttackTime = Random.Range(minAttackDelay, maxAttackDelay);
             _nextAttackTimer = 0;
+        }
+
+        private void CheckNextAttackTimer()
+        {
+            if (_nextAttackTimer >= _nextAttackTime && !IsAttacking && IsGrounded())
+            {
+                IsAttacking = true;
+                SetNextAttackTime();
+            }
+            else if (!IsAttacking)
+            {
+                _nextAttackTimer += Time.deltaTime;
+            }
+        }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                EventHandler.PlayerDeath?.Invoke();
+                _isGameLost = true;
+            }
         }
     }
 }
