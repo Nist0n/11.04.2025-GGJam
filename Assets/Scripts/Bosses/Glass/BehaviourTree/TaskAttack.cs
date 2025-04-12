@@ -20,6 +20,7 @@ namespace Bosses.Glass.BehaviourTree
         private float _nextProjectileTime;
 
         private int _currentPhase;
+        private float _shotYOffset = 0.5f;
         
         public TaskAttack(Transform transform, Transform playerTransform,
                           float attackInterval, int projectileCount,
@@ -118,7 +119,6 @@ namespace Bosses.Glass.BehaviourTree
 
         private void ShotgunWave()
         {
-            Debug.Log("Shotgun");
             if (_currentPhase == 1)
             {
                 return;
@@ -149,9 +149,10 @@ namespace Bosses.Glass.BehaviourTree
             Vector3 direction = (targetPosition - _transform.position).normalized;
         
             // Создаем снаряд
+            Vector3 spawn = new Vector3(_transform.position.x, _transform.position.y + _shotYOffset, _transform.position.z);
             var projectile = Object.Instantiate(
                 _projectile, 
-                _transform.position, 
+                spawn, 
                 Quaternion.LookRotation(direction));
             Projectile projectileScript = projectile.GetComponent<Projectile>();
             projectileScript.SetDirection(direction);
@@ -171,9 +172,11 @@ namespace Bosses.Glass.BehaviourTree
             
             Vector3 direction = Quaternion.Euler(0, currentAngle, 0) * baseDirection;
 
+            Vector3 spawn = new Vector3(_transform.position.x, _transform.position.y + _shotYOffset, _transform.position.z);
+
             var projectile = Object.Instantiate(
                 _projectile,
-                _transform.position,
+                spawn,
                 Quaternion.LookRotation(direction)
             );
             

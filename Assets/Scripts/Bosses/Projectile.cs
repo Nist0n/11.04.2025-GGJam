@@ -49,10 +49,10 @@ namespace Bosses
             {
                 return;
             }
-            // if (other.gameObject.CompareTag("Player"))
-            // {
-            //     GameEvents.PlayerDeath?.Invoke();
-            // }
+            if (other.gameObject.CompareTag("Player"))
+            {
+                GameEvents.PlayerDeath?.Invoke();
+            }
             DestroyProjectile();
         }
     }

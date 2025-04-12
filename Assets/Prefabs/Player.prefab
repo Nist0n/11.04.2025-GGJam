@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   mouseSensitivity: 10
-  jumpForce: 3
+  jumpForce: 6
   sprintMultiplier: 1.5
   dashSpeed: 30
   dashTime: 0.25
