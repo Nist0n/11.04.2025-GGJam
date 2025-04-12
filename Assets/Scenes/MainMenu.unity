@@ -391,8 +391,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 524962888}
   m_HandleRect: {fileID: 524962887}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.99993587
+  m_Value: 1
+  m_Size: 0.9996796
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1121,11 +1121,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474717216}
   m_CullTransparentMesh: 1
---- !u!82 &489607010 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 92961887008148115, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-  m_PrefabInstance: {fileID: 902086010742612317}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &521631118
 GameObject:
   m_ObjectHideFlags: 0
@@ -4475,110 +4470,6 @@ PrefabInstance:
     - target: {fileID: 40657633030040125, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: m_Name
       value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 92961887008148115, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 3424837256581625828, guid: 2055f50d0d1a5fa46b745e3b1c098a75, type: 2}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: ambientSource
-      value: 
-      objectReference: {fileID: 489607010}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: sounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: ambiend.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: ambient.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: a85e2dc12cba4f841bed60e3cc214833, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[0].name
-      value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7e75dc55dae841a4d9eccd7a56ec221d, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[1].name
-      value: ChestOpening
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: ac05d7966fcf1684c96cae53ca260101, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[2].name
-      value: ChestLoop
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 337cf3bae050fbe4d95850255b1516de, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[3].name
-      value: EyeOpening
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[4].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 27ea542ce6963754f87818f54d4558fb, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: music.Array.data[4].name
-      value: EyeLoop
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: a36b00a735f4f5747a54dcecb292223a, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: Click
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 06c913bfc223c014a838ea295b41b4cc, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: Click
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: ambiend.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3b15a77a736461b4e96ae4eb15dc154e, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: ambiend.Array.data[0].name
-      value: Ambient
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: ambient.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3b15a77a736461b4e96ae4eb15dc154e, type: 3}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: ambient.Array.data[0].name
-      value: Ambient
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: musicAudioRandomController
-      value: 
-      objectReference: {fileID: 6418180475301049370, guid: c136421687cab6e47bed0837c5560d5d, type: 2}
-    - target: {fileID: 6911663351984199583, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
-      propertyPath: Loop
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8382585116806453342, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: m_LocalPosition.x

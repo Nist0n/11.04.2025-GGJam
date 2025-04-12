@@ -1,4 +1,5 @@
 using Bosses.Chest.States;
+using Settings.Audio;
 using Static_Classes;
 using UnityEngine;
 
@@ -95,9 +96,11 @@ namespace Bosses.Chest
 
         private void StartSecondPhase()
         {
+            AudioManager.instance.PlaySfx("ChestBurp");
             IsSwitchingPhase = true;
             BossPhase = Phase.Second;
             GameEvents.SecondPhaseAchieved?.Invoke();
+            Speed += 3;
             MinCoinsToDrop = 5;
             MaxCoinsToDrop = 9;
             idleTime = 1;
@@ -127,13 +130,15 @@ namespace Bosses.Chest
         public void ReceiveDamage()
         {
             Health -= 2;
+            AudioManager.instance.PlaySfx("RandomChestSound1");
         }
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && !_isGameLost)
             {
                 GameEvents.PlayerDeath?.Invoke();
+                AudioManager.instance.PlaySfx("RandomChestSound2");
                 _isGameLost = true;
             }
         }

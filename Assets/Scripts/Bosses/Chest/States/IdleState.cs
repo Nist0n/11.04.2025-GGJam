@@ -1,3 +1,4 @@
+using Settings.Audio;
 using UnityEngine;
 
 namespace Bosses.Chest.States
@@ -6,6 +7,9 @@ namespace Bosses.Chest.States
     {
         public override void Enter()
         {
+            int rand = Random.Range(1, 4);
+
+            if (rand == 1) AudioManager.instance.PlaySfx("ChestBurp");
             //Core.BossAnimator.SetBool("IsMoving", false);
         }
     

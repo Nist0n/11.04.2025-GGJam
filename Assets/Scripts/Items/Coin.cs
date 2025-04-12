@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Settings.Audio;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -22,6 +23,11 @@ namespace Items
         
         public YieldInstruction Pickup()
         {
+            int rand = Random.Range(1, 2);
+
+            if (rand == 1) AudioManager.instance.PlaySfx("CoinDrop1");
+            else AudioManager.instance.PlaySfx("CoinDrop3");
+            
             return DOTween.Sequence()
                 .Append(transform.DOMove(transform.position + Vector3.up * 3, 0.25f))
                 .Join(transform.DORotate(Vector3.up * 180, 0.25f))

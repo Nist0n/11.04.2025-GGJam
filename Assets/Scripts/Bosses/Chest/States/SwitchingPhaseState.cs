@@ -1,3 +1,4 @@
+using Settings.Audio;
 using UnityEngine;
 
 namespace Bosses.Chest.States
@@ -43,6 +44,11 @@ namespace Bosses.Chest.States
         
         private void ShootProjectile(Vector3 targetPosition)
         {
+            int rand = Random.Range(1, 2);
+
+            if (rand == 1) AudioManager.instance.PlaySfx("CoinDrop1");
+            else AudioManager.instance.PlaySfx("CoinDrop3");
+            
             Vector3 direction = (targetPosition - Core.transform.position).normalized;
             
             var projectile = Instantiate(

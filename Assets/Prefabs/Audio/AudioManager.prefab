@@ -49,9 +49,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 5150465969462322397}
   musicSource: {fileID: 6911663351984199583}
-  music: []
-  sounds: []
-  musicAudioRandomController: {fileID: 0}
+  ambientSource: {fileID: 92961887008148115}
+  music:
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: a85e2dc12cba4f841bed60e3cc214833, type: 3}
+  - name: ChestOpening
+    clip: {fileID: 8300000, guid: 7e75dc55dae841a4d9eccd7a56ec221d, type: 3}
+  - name: ChestLoop
+    clip: {fileID: 8300000, guid: ac05d7966fcf1684c96cae53ca260101, type: 3}
+  - name: EyeOpening
+    clip: {fileID: 8300000, guid: 337cf3bae050fbe4d95850255b1516de, type: 3}
+  - name: EyeLoop
+    clip: {fileID: 8300000, guid: 27ea542ce6963754f87818f54d4558fb, type: 3}
+  sounds:
+  - name: Click
+    clip: {fileID: 8300000, guid: a36b00a735f4f5747a54dcecb292223a, type: 3}
+  ambient:
+  - name: Ambient
+    clip: {fileID: 8300000, guid: 3b15a77a736461b4e96ae4eb15dc154e, type: 3}
+  musicAudioRandomController: {fileID: 6418180475301049370, guid: c136421687cab6e47bed0837c5560d5d, type: 2}
 --- !u!1 &1276728142675069137
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +109,7 @@ AudioSource:
   m_GameObject: {fileID: 1276728142675069137}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -9162306867117659351, guid: 2055f50d0d1a5fa46b745e3b1c098a75, type: 2}
+  OutputAudioMixerGroup: {fileID: 3424837256581625828, guid: 2055f50d0d1a5fa46b745e3b1c098a75, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -228,7 +244,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

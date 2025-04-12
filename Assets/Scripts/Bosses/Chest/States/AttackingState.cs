@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using Items;
+using Settings.Audio;
 using UnityEngine;
 
 namespace Bosses.Chest.States
@@ -50,6 +51,8 @@ namespace Bosses.Chest.States
         private void LaunchAttack()
         {
             //Core.BossAnimator.SetTrigger("Attack");
+            
+            AudioManager.instance.PlaySfx("RandomChestSound2");
 
             Vector3 toTarget = _predictedTarget - Core.transform.position;
             float gravity = Physics.gravity.magnitude;
@@ -80,6 +83,7 @@ namespace Bosses.Chest.States
             if (Vector3.Distance(Core.transform.position, _predictedTarget) < 0.5f || 
                 Time.time - _attackStartTime > attackDuration)
             {
+                AudioManager.instance.PlaySfx("ChestLand");
                 Core.Rb.linearVelocity = Vector3.zero;
                 IsComplete = true;
                 Core.IsAttacking = false;
@@ -98,7 +102,12 @@ namespace Bosses.Chest.States
 
         private IEnumerator DropCoins()
         {
+            int rand = Random.Range(1, 2);
+            
             yield return new WaitForSeconds(0.25f);
+
+            if (rand == 1) AudioManager.instance.PlaySfx("ALotCoinsDrop1");
+            else AudioManager.instance.PlaySfx("ALotCoinsDrop2");
             
             YieldInstruction[] coinsSpawnAnimations = new YieldInstruction[_coinsToSpawn];
             Coin[] coins = new Coin[_coinsToSpawn];

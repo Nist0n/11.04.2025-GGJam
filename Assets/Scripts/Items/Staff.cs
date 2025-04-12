@@ -1,5 +1,6 @@
 using System;
 using Bosses;
+using Settings.Audio;
 using UnityEngine;
 
 namespace Items
@@ -36,6 +37,7 @@ namespace Items
         {
             if (Input.GetMouseButtonUp(0) && _isSkillActive) // Left button
             {
+                AudioManager.instance.PlaySfx("MagicShot");
                 ShootProjectile();
                 _timer = 0;
                 _isSkillActive = false;

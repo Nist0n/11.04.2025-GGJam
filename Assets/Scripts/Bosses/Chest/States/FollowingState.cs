@@ -1,3 +1,4 @@
+using Settings.Audio;
 using UnityEngine;
 
 namespace Bosses.Chest.States
@@ -25,6 +26,8 @@ namespace Bosses.Chest.States
         
         private void JumpTowardsPlayer()
         {
+            AudioManager.instance.PlaySfx("RandomChestSound1");
+            
             Vector3 direction = (Core.Player.transform.position - Core.transform.position).normalized;
             direction.y = 0;
             
