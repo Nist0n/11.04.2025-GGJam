@@ -57,6 +57,10 @@ namespace Bosses.Glass.BehaviourTree
             {
                 Laser();
             }
+            else if (r == 2)
+            {
+                ShotgunWave();
+            }
             else
             {
                 ShootWave();
@@ -66,10 +70,10 @@ namespace Bosses.Glass.BehaviourTree
 
         private void Laser()
         {
-            // if (_currentPhase == 1)
-            // {
-            //     return;
-            // }
+            if (_currentPhase == 1)
+            {
+                return;
+            }
             Debug.Log("lasering");
             if (!_laserController.isLasering())
             {
@@ -112,6 +116,33 @@ namespace Bosses.Glass.BehaviourTree
             }
         }
 
+        private void ShotgunWave()
+        {
+            Debug.Log("Shotgun");
+            if (_currentPhase == 1)
+            {
+                return;
+            }
+            if (Time.time >= _nextWaveTime && _projectilesFiredInCurrentWave >= _projectileCount)
+            {
+                _projectilesFiredInCurrentWave = 0;
+                _nextWaveTime = Time.time + _waveCooldown;
+            }
+            
+            if (_projectilesFiredInCurrentWave < _projectileCount && Time.time >= _nextProjectileTime)
+            {
+                Shotgun(_projectilesFiredInCurrentWave);
+                _projectilesFiredInCurrentWave++;
+                _nextProjectileTime = Time.time + _attackInterval;
+            
+                // Если волна завершена, устанавливаем время для следующей волны
+                if (_projectilesFiredInCurrentWave >= _projectileCount)
+                {
+                    _nextWaveTime = Time.time + _waveCooldown;
+                }
+            }
+        }
+
         private void ShootProjectile(Vector3 targetPosition)
         {
             // Рассчитываем направление к игроку
@@ -124,6 +155,34 @@ namespace Bosses.Glass.BehaviourTree
                 Quaternion.LookRotation(direction));
             Projectile projectileScript = projectile.GetComponent<Projectile>();
             projectileScript.SetDirection(direction);
+            if (_currentPhase == 2)
+            {
+                projectileScript.SetSpeed(45);    
+            }
+        }
+
+        private void Shotgun(int currentProjectile)
+        {
+            Vector3 baseDirection = (_playerTransform.position - _transform.position).normalized;
+
+            float spreadAngle = 15f;
+            float angleStep = -spreadAngle / (_projectileCount - 1);
+            float currentAngle = -spreadAngle / 2 + angleStep * currentProjectile;
+            
+            Vector3 direction = Quaternion.Euler(0, currentAngle, 0) * baseDirection;
+
+            var projectile = Object.Instantiate(
+                _projectile,
+                _transform.position,
+                Quaternion.LookRotation(direction)
+            );
+            
+            Projectile projectileScript = projectile.GetComponent<Projectile>();
+            projectileScript.SetDirection(direction);
+            if (_currentPhase == 2)
+            {
+                projectileScript.SetSpeed(45);    
+            }
         }
     }
 }

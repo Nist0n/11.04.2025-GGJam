@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3258293407167132014}
   m_Layer: 0
   m_Name: StaffSpell
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
