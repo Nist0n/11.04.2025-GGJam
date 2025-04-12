@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using AI.BehaviourTree.Base;
 using Bosses.Glass.BehaviourTree;
 using Static_Classes;
@@ -26,18 +27,22 @@ namespace Bosses.Glass
 
         private NavMeshAgent _agent;
         private Transform _transform;
+        private Rigidbody _rigidbody;
 
         private int _currentPhase = 1;
         
         private void Start()
         {
             _rootNode = SetupTree();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         protected override Node SetupTree()
         {
             _agent = GetComponent<NavMeshAgent>();
             LineRenderer lineRenderer = GetComponent<LineRenderer>();
+            _rigidbody = GetComponent<Rigidbody>();
             
             _transform = transform;
             
@@ -82,12 +87,15 @@ namespace Bosses.Glass
                 }, forceRoot: true);
             }
             
-
             return root;
         }
 
         private void Update()
         {
+            if (_rigidbody.constraints == RigidbodyConstraints.FreezeAll)
+            {
+                return;
+            }
             _rootNode.Evaluate();
         }
 
@@ -108,6 +116,20 @@ namespace Bosses.Glass
                 Debug.Log("Boss hit player");
                 GameEvents.PlayerDeath?.Invoke();
             }
+
+            if (other.gameObject.CompareTag("Spell"))
+            {
+                StartCoroutine(Stun());
+            }
+        }
+
+        private IEnumerator Stun()
+        {
+            _agent.isStopped = true;
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            yield return new WaitForSeconds(3f);
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            _agent.isStopped = false;
         }
     }
 }

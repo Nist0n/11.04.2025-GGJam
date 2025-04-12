@@ -37,6 +37,11 @@ namespace Bosses
         {
             _direction = direction.normalized;
         }
+
+        public void SetSpeed(float speed)
+        {
+            projectileSpeed = speed;
+        }
         
         private void OnTriggerEnter(Collider other)
         {
@@ -44,10 +49,10 @@ namespace Bosses
             {
                 return;
             }
-            if (other.gameObject.CompareTag("Player"))
-            {
-                GameEvents.PlayerDeath?.Invoke();
-            }
+            // if (other.gameObject.CompareTag("Player"))
+            // {
+            //     GameEvents.PlayerDeath?.Invoke();
+            // }
             DestroyProjectile();
         }
     }
