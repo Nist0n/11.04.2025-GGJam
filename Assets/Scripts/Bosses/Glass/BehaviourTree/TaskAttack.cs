@@ -33,17 +33,15 @@ namespace Bosses.Glass.BehaviourTree
         {
             _state = NodeState.Running;
             _dashController.UpdateDash();
-            if (_dashController.currentState is DashState.Ready or DashState.Cooldown)
+            if (_dashController.currentState is not (DashState.Ready or DashState.Cooldown)) return _state;
+            int r = Random.Range(0, 5);
+            if (r == 0)
             {
-                int r = Random.Range(0, 5);
-                if (r == 0)
-                {
-                    Charge();
-                }
-                else
-                {
-                    ShootWave();
-                }
+                Charge();
+            }
+            else
+            {
+                ShootWave();
             }
             return _state;
         }
