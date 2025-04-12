@@ -64,6 +64,34 @@ MonoBehaviour:
   sounds:
   - name: Click
     clip: {fileID: 8300000, guid: a36b00a735f4f5747a54dcecb292223a, type: 3}
+  - name: MagicShot
+    clip: {fileID: 8300000, guid: 815a9fab1c66094408abcad4038d42ae, type: 3}
+  - name: ALotCoinsDrop1
+    clip: {fileID: 8300000, guid: c3b36ab60c0d20248b2105eeefffb2bd, type: 3}
+  - name: ALotCoinsDrop2
+    clip: {fileID: 8300000, guid: 1bf1ca3fe052cb742bc99207abd00b86, type: 3}
+  - name: ChestBurp
+    clip: {fileID: 8300000, guid: 67eb67a5cb201314c8dd3f3b0da4b6ad, type: 3}
+  - name: ChestLand
+    clip: {fileID: 8300000, guid: b4e2405762d38914e8dfe559bb4162a3, type: 3}
+  - name: CoinDrop1
+    clip: {fileID: 8300000, guid: 49084d61a9c63e342833d84d2012afe1, type: 3}
+  - name: CoinDrop3
+    clip: {fileID: 8300000, guid: 2830bf1883d9d5b4387ddc219d62e5f9, type: 3}
+  - name: RandomChestSound1
+    clip: {fileID: 8300000, guid: 2481158b98d20db48a6c538379fad1e4, type: 3}
+  - name: RandomChestSound2
+    clip: {fileID: 8300000, guid: f8895b0f0715fce4e99f72b4679c5fc9, type: 3}
+  - name: Dash
+    clip: {fileID: 8300000, guid: cf00887887544ca4a8fb65bcbbd54719, type: 3}
+  - name: Die
+    clip: {fileID: 8300000, guid: 0620a0d66fda4044893f0250a77d0625, type: 3}
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: a4434ff9b7afb9d4ea7f678642060e22, type: 3}
+  - name: FireTrap
+    clip: {fileID: 8300000, guid: 529285321b00f3c45b47da115cd9cfc9, type: 3}
+  - name: TileTrap
+    clip: {fileID: 8300000, guid: f2ff35fd30757034485eb0c8ef841696, type: 3}
   ambient:
   - name: Ambient
     clip: {fileID: 8300000, guid: 3b15a77a736461b4e96ae4eb15dc154e, type: 3}
@@ -244,7 +272,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
