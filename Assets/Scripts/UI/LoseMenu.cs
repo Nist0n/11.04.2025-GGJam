@@ -5,6 +5,7 @@ using GameControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using EventHandler = Static_Classes.EventHandler;
 
 namespace UI
 {

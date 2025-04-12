@@ -1,6 +1,6 @@
 using System;
-using Static_Classes;
 using UnityEngine;
+using EventHandler = Static_Classes.EventHandler;
 
 namespace GameControl
 {
@@ -33,14 +33,14 @@ namespace GameControl
 
         private void OnDisable()
         {
-            GameEvents.SecondPhaseAchieved -= SetOnSecondPhaseAchieved;
-            GameEvents.BossCompleted -= SetOnBossCompleted;
+            EventHandler.SecondPhaseAchieved -= SetOnSecondPhaseAchieved;
+            EventHandler.BossCompleted -= SetOnBossCompleted;
         }
 
         private void OnEnable()
         {
-            GameEvents.SecondPhaseAchieved += SetOnSecondPhaseAchieved;
-            GameEvents.BossCompleted += SetOnBossCompleted;
+            EventHandler.SecondPhaseAchieved += SetOnSecondPhaseAchieved;
+            EventHandler.BossCompleted += SetOnBossCompleted;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
-using Static_Classes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EventHandler = Static_Classes.EventHandler;
 
 namespace Player
 {
@@ -63,12 +63,12 @@ namespace Player
 
         private void OnDisable()
         {
-            GameEvents.PlayerDeath -= SetOnPlayerDeath;
+            EventHandler.PlayerDeath -= SetOnPlayerDeath;
         }
 
         private void OnEnable()
         {
-            GameEvents.PlayerDeath += SetOnPlayerDeath;
+            EventHandler.PlayerDeath += SetOnPlayerDeath;
         }
 
         private void Look()
