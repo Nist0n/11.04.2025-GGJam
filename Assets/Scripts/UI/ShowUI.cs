@@ -25,12 +25,12 @@ namespace UI
         
         private void OnDisable()
         {
-            EventHandler.PlayerDeath -= ShowLoseUI;
+            GameEvents.PlayerDeath -= ShowLoseUI;
         }
 
         private void OnEnable()
         {
-            EventHandler.PlayerDeath += ShowLoseUI;
+            GameEvents.PlayerDeath += ShowLoseUI;
         }
     }
 }

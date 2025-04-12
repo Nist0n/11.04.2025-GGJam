@@ -2,7 +2,7 @@
 
 namespace Static_Classes
 {
-    public static class EventHandler
+    public static class GameEvents
     {
         public static Action PlayerDeath;
         

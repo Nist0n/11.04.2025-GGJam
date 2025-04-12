@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
-using EventHandler = Static_Classes.EventHandler;
 
 namespace Bosses.Chest
 {
