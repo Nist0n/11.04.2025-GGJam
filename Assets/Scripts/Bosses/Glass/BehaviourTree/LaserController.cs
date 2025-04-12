@@ -102,7 +102,7 @@ namespace Bosses.Glass.BehaviourTree
                 _stateTimer = _cooldownTime;
                 _lineRenderer.enabled = false;
                 _agent.isStopped = false;
-                _agent.baseOffset = 0.77f;
+                _agent.baseOffset = 1.75f;
             }
             
             _stateTimer -= Time.deltaTime;

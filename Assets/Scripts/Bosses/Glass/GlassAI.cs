@@ -99,9 +99,10 @@ namespace Bosses.Glass
             _rootNode.Evaluate();
         }
 
-        public void ReceiveDamage()
+        private void ReceiveDamage()
         {
             health -= 1;
+            Debug.Log(health);
             if (health <= 3)
             {
                 _currentPhase = 2;
@@ -120,6 +121,11 @@ namespace Bosses.Glass
             if (other.gameObject.CompareTag("Spell"))
             {
                 StartCoroutine(Stun());
+            }
+
+            if (other.gameObject.CompareTag("Trap"))
+            {
+                ReceiveDamage();
             }
         }
 

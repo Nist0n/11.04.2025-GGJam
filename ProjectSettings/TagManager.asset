@@ -11,6 +11,7 @@ TagManager:
   - BossGlass
   - Boss
   - Spell
+  - Trap
   layers:
   - Default
   - TransparentFX
