@@ -35,7 +35,8 @@ namespace UI
         {
             AudioManager.instance.PlaySfx("Click");
             SceneManager.LoadScene(1);
-            AudioManager.instance.StartMusicShuffle();
+            AudioManager.instance.PlayMusic("ChestOpening");
+            AudioManager.instance.PlayAmbient("Ambient");
         }
 
         private void ToggleSettings()

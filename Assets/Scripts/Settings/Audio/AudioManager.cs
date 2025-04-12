@@ -11,7 +11,8 @@ namespace Settings.Audio
 
         [SerializeField] private AudioSource sfxSource;
         [SerializeField] private AudioSource musicSource;
-        [SerializeField] private List<Sound> music, sounds;
+        [SerializeField] private AudioSource ambientSource;
+        [SerializeField] private List<Sound> music, sounds, ambient;
         [SerializeField] private AudioResource musicAudioRandomController;
 
         private void Awake()
@@ -52,6 +53,20 @@ namespace Settings.Audio
             
             musicSource.clip = s.clip;
             musicSource.Play();
+        }
+
+        public void PlayAmbient(string ambientName)
+        {
+            Sound s = ambient.Find(x => x.name == ambientName);
+
+            if (s == null)
+            {
+                Debug.LogWarning("Ambient: " + ambientName + " not found!");
+                return;
+            }
+
+            ambientSource.clip = s.clip;
+            ambientSource.Play();
         }
         
         public void StartMusicShuffle()
