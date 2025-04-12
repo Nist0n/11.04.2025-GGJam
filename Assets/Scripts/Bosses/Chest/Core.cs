@@ -1,4 +1,5 @@
 using System;
+using Items;
 using UnityEngine;
 using UnityEngine.Serialization;
 using EventHandler = Static_Classes.EventHandler;
@@ -7,6 +8,12 @@ namespace Bosses.Chest
 {
     public abstract class Core : MonoBehaviour
     {
+        public Coin CoinPrefab;
+
+        public int MinCoinsToDrop = 3;
+        
+        public int MaxCoinsToDrop = 6;
+        
         public Rigidbody Rb;
         
         public Animator BossAnimator;

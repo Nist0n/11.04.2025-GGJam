@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5646846176281091980, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6868197866487742622, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9524584
@@ -170,6 +174,10 @@ PrefabInstance:
     - target: {fileID: 7386978026019446642, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7386978026019446642, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7386978026019446642, guid: 5779a72bf0b3caa44901babe469ad738, type: 3}
       propertyPath: m_TagString
@@ -285,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 527443774}
   - component: {fileID: 527443773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DeathState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,9 +431,9 @@ GameObject:
   - component: {fileID: 1149430754}
   - component: {fileID: 1149430753}
   - component: {fileID: 1149430759}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
-  m_TagString: Boss
+  m_TagString: BossChest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,6 +450,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8e627d607eea54982b650e6a4b613e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinPrefab: {fileID: 6114226937289165281, guid: 89a3fa15de30c4f4a8ffb5322553e033, type: 3}
+  MinCoinsToDrop: 3
+  MaxCoinsToDrop: 6
   Rb: {fileID: 1149430754}
   BossAnimator: {fileID: 0}
   Speed: 3
@@ -619,7 +630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1283326683}
   - component: {fileID: 1283326682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FollowingState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1291952194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584149255}
   - component: {fileID: 1584149254}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SwitchingPhaseState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1932911690}
   - component: {fileID: 1932911689}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IdleState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1034,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979263186}
   - component: {fileID: 1979263185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackingState
   m_TagString: Untagged
   m_Icon: {fileID: 0}

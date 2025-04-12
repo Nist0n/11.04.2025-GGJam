@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Boss
+  - BossChest
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -12,9 +13,9 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Coin
+  - Boss
+  - Player
   - 
   - 
   - 

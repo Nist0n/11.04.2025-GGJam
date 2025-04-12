@@ -122,6 +122,11 @@ namespace Bosses.Chest
             }
         }
         
+        public void ReceiveDamage()
+        {
+            Health -= 2;
+        }
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))

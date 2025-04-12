@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using Bosses.Chest;
+using Items;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using EventHandler = Static_Classes.EventHandler;
@@ -25,6 +27,7 @@ namespace Player
         private bool _grounded;
         private bool _dashing;
         private bool _isGameLost;
+        private bool _isTakingCoin;
         
         private InputAction _moveAction;
         private InputAction _lookAction;
@@ -34,11 +37,14 @@ namespace Player
         
         private float _rotationX;
         private float _moveSpeed;
+        private Chest _chest;
 
         private void SetOnPlayerDeath() => _isGameLost = true;
         
         private void Start()
         {
+            _chest = GameObject.FindGameObjectWithTag("BossChest").GetComponent<Chest>();
+            
             _characterController = GetComponent<CharacterController>();
             
             _cameraTransform = Camera.main.transform;
@@ -140,6 +146,26 @@ namespace Player
                 yield return new WaitForSeconds(dashCooldown);
                 _dashing = false;
             }
+        }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Coin") && !_isTakingCoin)
+            {
+                StartCoroutine(PickupCoin(other.GetComponent<Coin>()));
+                _isTakingCoin = true;
+            }
+        }
+
+        private IEnumerator PickupCoin(Coin coin)
+        {
+            _chest.ReceiveDamage();
+            
+            yield return coin.Pickup();
+            
+            Destroy(coin);
+
+            _isTakingCoin = false;
         }
     }
 }

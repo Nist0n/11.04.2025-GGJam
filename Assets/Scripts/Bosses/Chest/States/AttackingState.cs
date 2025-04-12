@@ -1,3 +1,6 @@
+using System.Collections;
+using DG.Tweening;
+using Items;
 using UnityEngine;
 
 namespace Bosses.Chest.States
@@ -12,9 +15,11 @@ namespace Bosses.Chest.States
         private float _attackStartTime;
         private bool _isAirborne;
         private Vector3 _predictedTarget;
+        private int _coinsToSpawn;
 
         public override void Enter()
         {
+            _coinsToSpawn = Random.Range(Core.MinCoinsToDrop, Core.MaxCoinsToDrop);
             //Core.BossAnimator.SetTrigger("PrepareAttack");
             _predictedTarget = Core.Player.transform.position;
             _attackStartTime = Time.time;
@@ -26,6 +31,7 @@ namespace Bosses.Chest.States
             if (Time.time - _attackStartTime > 0.3f && !_isAirborne)
             {
                 LaunchAttack();
+                StartCoroutine(DropCoins());
                 _isAirborne = true;
             }
 
@@ -88,6 +94,44 @@ namespace Bosses.Chest.States
                 Gizmos.color = Color.red;
                 Gizmos.DrawSphere(_predictedTarget, 0.3f);
             }
+        }
+
+        private IEnumerator DropCoins()
+        {
+            yield return new WaitForSeconds(0.25f);
+            
+            YieldInstruction[] coinsSpawnAnimations = new YieldInstruction[_coinsToSpawn];
+            Coin[] coins = new Coin[_coinsToSpawn];
+
+            for (int i = 0; i < _coinsToSpawn; i++)
+            {
+                if (i != 0)
+                {
+                    yield return new WaitForSeconds(0.4f);
+                }
+
+                Vector3 point = Core.transform.position;
+                point.y += 2;
+
+                coins[i] = Instantiate(Core.CoinPrefab, point,
+                    Quaternion.Euler(0, Random.Range(0, 360), 0));
+
+                coinsSpawnAnimations[i] = AnimateSpawnFor(coins[i]);
+            }
+
+            foreach (var spawnAnimation in coinsSpawnAnimations)
+            {
+                yield return spawnAnimation;
+            }
+        }
+
+        private YieldInstruction AnimateSpawnFor(Coin coin)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle;
+            Vector3 offset = new Vector3(randomOffset.x + Random.Range(-4, 4), Random.Range(1, 5), randomOffset.y);
+            Vector3 jumpPosition = coin.transform.position + offset * 3f;
+
+            return coin.transform.DOJump(jumpPosition, 2, 1, 0.7f).SetEase(Ease.OutBounce).Play().WaitForCompletion();
         }
     }
 }
