@@ -1,18 +1,36 @@
-﻿using Static_Classes;
+using System;
+using System.Collections;
 using UnityEngine;
 
-namespace Bosses
+namespace Items
 {
-    public class Projectile : MonoBehaviour
+    public class StaffProjectile : MonoBehaviour
     {
         [SerializeField] private float projectileSpeed;
         
+        [SerializeField] private GameObject hitEffect;
+        
         private Vector3 _direction;
+        
         private float _progress;
         
         private float _timer;
 
         private const float TimeToDeath = 5;
+
+        private GameObject _boss;
+
+        private void Start()
+        {
+            if (GameObject.FindGameObjectWithTag("BossChest"))
+            {
+                _boss = GameObject.FindGameObjectWithTag("BossChest");
+            }
+            else
+            {
+                _boss = GameObject.FindGameObjectWithTag("BossGlass");
+            }
+        }
 
         private void Update()
         {
@@ -40,14 +58,17 @@ namespace Bosses
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("BossGlass") || other.gameObject.CompareTag("Projectile"))
+            if (other.CompareTag("BossGlass") || other.CompareTag("BossChest"))
             {
-                return;
+                StartCoroutine(ShowHit());
             }
-            if (other.gameObject.CompareTag("Player"))
-            {
-                GameEvents.PlayerDeath?.Invoke();
-            }
+        }
+
+        private IEnumerator ShowHit()
+        {
+            var temp = Instantiate(hitEffect, gameObject.transform.position, Quaternion.identity, _boss.transform);
+            yield return new WaitForSeconds(1);
+            Destroy(temp);
             DestroyProjectile();
         }
     }

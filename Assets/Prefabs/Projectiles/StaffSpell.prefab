@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2901019707013529580}
   - component: {fileID: 4979346597699650313}
   - component: {fileID: 7672353917157581312}
-  - component: {fileID: 7747240194031611806}
+  - component: {fileID: 3258293407167132014}
   m_Layer: 0
   m_Name: StaffSpell
   m_TagString: Untagged
@@ -4920,7 +4920,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7747240194031611806
+--- !u!114 &3258293407167132014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4929,10 +4929,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2663747447871312814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b4dec12926467e8531117b7ad6fc41, type: 3}
+  m_Script: {fileID: 11500000, guid: 56d7e8e65ffb39f4f8b12f609683c1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 15
+  hitEffect: {fileID: 3185333507899166744, guid: f752e95b8cfcbf943a870d0dda13d7aa, type: 3}
 --- !u!1 &4906065994542045792
 GameObject:
   m_ObjectHideFlags: 0

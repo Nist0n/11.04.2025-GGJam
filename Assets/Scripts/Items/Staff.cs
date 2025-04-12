@@ -59,11 +59,11 @@ namespace Items
             Vector3 castDirection = _camera.transform.forward;
             castDirection.x -= 0.05f;
             
-            var projectile = Instantiate(
+            var temp = Instantiate(
                 this.projectile, 
                 fromObj.transform.position, 
                 Quaternion.LookRotation(castDirection));
-            projectile.GetComponent<Projectile>().SetDirection(castDirection);
+            temp.GetComponent<StaffProjectile>().SetDirection(castDirection);
         }
     }
 }
