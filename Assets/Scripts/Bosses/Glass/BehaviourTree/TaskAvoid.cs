@@ -12,13 +12,16 @@ namespace Bosses.Glass.BehaviourTree
         private Transform _targetTransform;
         private float _avoidDistance;
 
-        public TaskAvoid(NavMeshAgent agent, Transform playerTransform, Transform transform, Transform targetTransform, float avoidDistance)
+        private LaserController _laserController;
+        
+        public TaskAvoid(NavMeshAgent agent, Transform playerTransform, Transform transform, Transform targetTransform, float avoidDistance, LaserController laserController)
         {
             _agent = agent;
             _playerTransform = playerTransform;
             _transform = transform;
             _targetTransform = targetTransform;
             _avoidDistance = avoidDistance;
+            _laserController = laserController;
         }
 
         public override NodeState Evaluate()
@@ -28,7 +31,11 @@ namespace Bosses.Glass.BehaviourTree
             _agent.SetDestination(_targetTransform.position);
             
             Vector3 directionToPlayer = _playerTransform.position - _transform.position;
-            // _transform.Rotate(directionToPlayer.x, 0, directionToPlayer.z);
+            if (_laserController.CurrentState != LaserState.Lasering)
+            {
+                _transform.rotation = Quaternion.LookRotation(directionToPlayer);
+            }
+            
             float sqrDistance = Vector3.SqrMagnitude(directionToPlayer);
             if (sqrDistance < Mathf.Pow(_avoidDistance, 2))
             {
