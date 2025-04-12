@@ -18,7 +18,11 @@ namespace Bosses.Glass.BehaviourTree
         private int _projectilesFiredInCurrentWave;
         private float _nextProjectileTime;
         
-        public TaskAttack(Transform transform, Transform playerTransform, float attackInterval, int projectileCount, float waveCooldown, GameObject projectile, BossDashController dashController)
+        public TaskAttack(Transform transform, Transform playerTransform,
+            float attackInterval, int projectileCount,
+            float waveCooldown, GameObject projectile,
+            float dashSpeed, float dashDuration
+            )
         {
             _transform = transform;
             _playerTransform = playerTransform;
@@ -26,14 +30,16 @@ namespace Bosses.Glass.BehaviourTree
             _projectileCount = projectileCount;
             _waveCooldown = waveCooldown;
             _projectile = projectile;
-            _dashController = dashController;
+            
+            LayerMask wallMask = LayerMask.GetMask("Wall");
+            _dashController = new BossDashController(_transform, wallMask, dashSpeed, dashDuration);
         }
 
         public override NodeState Evaluate()
         {
             _state = NodeState.Running;
             _dashController.UpdateDash();
-            if (_dashController.currentState is not (DashState.Ready or DashState.Cooldown)) return _state;
+            if (_dashController.CurrentState is not (DashState.Ready or DashState.Cooldown)) return _state;
             int r = Random.Range(0, 5);
             if (r == 0)
             {
