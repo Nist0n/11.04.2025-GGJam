@@ -485,7 +485,7 @@
                 {
                     "name": "",
                     "id": "391a835e-db27-4930-9d74-4fe0997e4b15",
-                    "path": "<Keyboard>/leftAlt",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",

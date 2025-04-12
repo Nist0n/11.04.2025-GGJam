@@ -17,14 +17,17 @@ namespace Bosses.Glass
         [SerializeField] private float intervalBetweenShots;
         [SerializeField] private int projectileCount;
         [SerializeField] private float waveCooldown;
-        
         [SerializeField] private float avoidDistance;
+        [SerializeField] private float dashSpeed;
+        [SerializeField] private float dashDuration;
         
         private Node _rootNode;
 
         private NavMeshAgent _agent;
         private Transform _transform;
 
+        private int _currentPhase = 1;
+        
         private void Start()
         {
             _rootNode = SetupTree();
@@ -34,21 +37,42 @@ namespace Bosses.Glass
         {
             _agent = GetComponent<NavMeshAgent>();
             _transform = transform;
-            LayerMask wallMask = LayerMask.GetMask("Wall");
-            BossDashController bossDashController = new BossDashController(_transform, wallMask);
+            
             
             Node root = new Selector();
 
             Node phaseOne = new Sequence(new List<Node>
             {
                 new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
-                new TaskAttack(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile, bossDashController)
+                new TaskAttack(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile, dashSpeed, dashDuration)
             });
-            
-            root.SetChildren(new List<Node>
+
+            Node phaseTwo = new Sequence(new List<Node>
             {
-                phaseOne
-            }, forceRoot: true);
+                new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
+                new TaskAttack(_transform, playerTransform,
+                    intervalBetweenShots - 0.05f, projectileCount * 2,
+                    waveCooldown - 1, projectile,
+                    dashSpeed * 1.5f, dashDuration - 0.1f
+                    )
+                // new TaskLaser
+            });
+
+            if (_currentPhase == 1)
+            {
+                root.SetChildren(new List<Node>
+                {
+                    phaseOne
+                }, forceRoot: true);
+            }
+            else
+            {
+                root.SetChildren(new List<Node>
+                {
+                    phaseTwo
+                }, forceRoot: true);
+            }
+            
 
             return root;
         }
@@ -58,6 +82,16 @@ namespace Bosses.Glass
             _rootNode.Evaluate();
         }
 
+        public void ReceiveDamage()
+        {
+            health -= 1;
+            if (health <= 3)
+            {
+                _currentPhase = 2;
+                _rootNode = SetupTree();
+            }
+        }
+        
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Player"))

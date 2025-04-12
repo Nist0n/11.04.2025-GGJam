@@ -4,40 +4,43 @@ namespace Bosses.Glass
 {
     public class BossDashController {
         private Transform _bossTransform;
-        private float dashSpeed = 80f;
-        private float dashDuration = 0.3f;
-        private float prepareTime = 1f;
-        private float stopDistance = 3f; // Дистанция до стены для остановки
-        private LayerMask wallMask;
+        private float _dashSpeed;
+        private float _dashDuration;
+        private float _prepareTime = 1f;
+        private float _stopDistance = 3f; // Дистанция до стены для остановки
+        private LayerMask _wallMask;
 
-        public DashState currentState = DashState.Ready;
-        private float stateTimer;
-        private Vector3 dashDirection;
+        public DashState CurrentState = DashState.Ready;
+        private float _stateTimer;
+        private Vector3 _dashDirection;
+        private float _cooldownTimer = 4f;
 
-        public BossDashController(Transform boss, LayerMask wallLayer) {
+        public BossDashController(Transform boss, LayerMask wallLayer, float dashSpeed, float dashDuration) {
             _bossTransform = boss;
-            wallMask = wallLayer;
+            _wallMask = wallLayer;
+            _dashSpeed = dashSpeed;
+            _dashDuration = dashDuration;
         }
 
         public void StartDash(Vector3 targetPosition) {
-            if (currentState != DashState.Ready) return;
+            if (CurrentState != DashState.Ready) return;
             
-            dashDirection = (targetPosition - _bossTransform.position).normalized;
-            dashDirection.y = 0; // Игнорируем вертикальную составляющую
-            currentState = DashState.Preparing;
-            stateTimer = prepareTime;
+            _dashDirection = (targetPosition - _bossTransform.position).normalized;
+            _dashDirection.y = 0; // Игнорируем вертикальную составляющую
+            CurrentState = DashState.Preparing;
+            _stateTimer = _prepareTime;
             
             // Поворачиваем босса к цели
-            _bossTransform.rotation = Quaternion.LookRotation(dashDirection);
+            _bossTransform.rotation = Quaternion.LookRotation(_dashDirection);
         }
 
         public void UpdateDash() {
-            switch (currentState) {
+            switch (CurrentState) {
                 case DashState.Preparing:
-                    stateTimer -= Time.deltaTime;
-                    if (stateTimer <= 0) {
-                        currentState = DashState.Dashing;
-                        stateTimer = dashDuration;
+                    _stateTimer -= Time.deltaTime;
+                    if (_stateTimer <= 0) {
+                        CurrentState = DashState.Dashing;
+                        _stateTimer = _dashDuration;
                     }
                     break;
                     
@@ -46,40 +49,40 @@ namespace Bosses.Glass
                     break;
                     
                 case DashState.Cooldown:
-                    stateTimer -= Time.deltaTime;
-                    if (stateTimer <= 0) {
-                        currentState = DashState.Ready;
+                    _stateTimer -= Time.deltaTime;
+                    if (_stateTimer <= 0) {
+                        CurrentState = DashState.Ready;
                     }
                     break;
             }
         }
 
         private void DashMovement() {
-            float moveDistance = dashSpeed * Time.deltaTime;
+            float moveDistance = _dashSpeed * Time.deltaTime;
             
             // Проверяем столкновение со стеной
-            if (Physics.Raycast(_bossTransform.position, dashDirection, 
-                              out RaycastHit hit, moveDistance + stopDistance, wallMask)) {
+            if (Physics.Raycast(_bossTransform.position, _dashDirection, 
+                              out RaycastHit hit, moveDistance + _stopDistance, _wallMask)) {
                 // Останавливаемся перед стеной
-                _bossTransform.position = hit.point - dashDirection * stopDistance;
-                currentState = DashState.Cooldown;
-                stateTimer = 4f; // Время "остывания"
+                _bossTransform.position = hit.point - _dashDirection * _stopDistance;
+                CurrentState = DashState.Cooldown;
+                _stateTimer = _cooldownTimer; // Время "остывания"
                 return;
             }
             
             // Двигаемся
-            _bossTransform.position += dashDirection * moveDistance;
+            _bossTransform.position += _dashDirection * moveDistance;
             
             // Завершаем рывок по таймеру
-            stateTimer -= Time.deltaTime;
-            if (stateTimer <= 0) {
-                currentState = DashState.Cooldown;
-                stateTimer = 4f;
+            _stateTimer -= Time.deltaTime;
+            if (_stateTimer <= 0) {
+                CurrentState = DashState.Cooldown;
+                _stateTimer = _cooldownTimer;
             }
         }
 
         public bool IsDashing() {
-            return currentState != DashState.Ready;
+            return CurrentState != DashState.Ready;
         }
     }
 
