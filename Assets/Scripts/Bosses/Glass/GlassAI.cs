@@ -38,13 +38,12 @@ namespace Bosses.Glass
             _agent = GetComponent<NavMeshAgent>();
             _transform = transform;
             
-            
             Node root = new Selector();
 
             Node phaseOne = new Sequence(new List<Node>
             {
                 new TaskAvoid(_agent, playerTransform, _transform, targetTransform, avoidDistance),
-                new TaskAttack(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile, dashSpeed, dashDuration)
+                new TaskAttack(_transform, playerTransform, intervalBetweenShots, projectileCount, waveCooldown, projectile, dashSpeed, dashDuration, _currentPhase)
             });
 
             Node phaseTwo = new Sequence(new List<Node>
@@ -53,9 +52,8 @@ namespace Bosses.Glass
                 new TaskAttack(_transform, playerTransform,
                     intervalBetweenShots - 0.05f, projectileCount * 2,
                     waveCooldown - 1, projectile,
-                    dashSpeed * 1.5f, dashDuration - 0.1f
+                    dashSpeed * 1.5f, dashDuration - 0.1f, _currentPhase
                     )
-                // new TaskLaser
             });
 
             if (_currentPhase == 1)
@@ -92,7 +90,7 @@ namespace Bosses.Glass
             }
         }
         
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
             {

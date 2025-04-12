@@ -13,16 +13,20 @@ namespace Bosses.Glass.BehaviourTree
         private GameObject _projectile;
 
         private BossDashController _dashController;
+        private LaserController _laserController;
 
         private float _nextWaveTime;
         private int _projectilesFiredInCurrentWave;
         private float _nextProjectileTime;
+
+        private int _currentPhase;
         
         public TaskAttack(Transform transform, Transform playerTransform,
-            float attackInterval, int projectileCount,
-            float waveCooldown, GameObject projectile,
-            float dashSpeed, float dashDuration
-            )
+                          float attackInterval, int projectileCount,
+                          float waveCooldown, GameObject projectile,
+                          float dashSpeed, float dashDuration,
+                          int currentPhase
+                          )
         {
             _transform = transform;
             _playerTransform = playerTransform;
@@ -30,6 +34,7 @@ namespace Bosses.Glass.BehaviourTree
             _projectileCount = projectileCount;
             _waveCooldown = waveCooldown;
             _projectile = projectile;
+            _currentPhase = currentPhase;
             
             LayerMask wallMask = LayerMask.GetMask("Wall");
             _dashController = new BossDashController(_transform, wallMask, dashSpeed, dashDuration);
@@ -39,17 +44,38 @@ namespace Bosses.Glass.BehaviourTree
         {
             _state = NodeState.Running;
             _dashController.UpdateDash();
+            _laserController.UpdateLasering();
             if (_dashController.CurrentState is not (DashState.Ready or DashState.Cooldown)) return _state;
-            int r = Random.Range(0, 5);
+            if (_laserController.CurrentState is not (LaserState.Ready or LaserState.Cooldown)) return _state;
+            int r = Random.Range(0, _currentPhase * 5);
             if (r == 0)
             {
                 Charge();
+            }
+            else if (r == 1)
+            {
+                Laser();
             }
             else
             {
                 ShootWave();
             }
             return _state;
+        }
+
+        private void Laser()
+        {
+            if (_currentPhase == 1)
+            {
+                return;
+            }
+            
+            if (!_laserController.isLasering())
+            {
+                _laserController.StartLasering();
+            }
+            
+            _laserController.UpdateLasering();
         }
 
         private void Charge()
