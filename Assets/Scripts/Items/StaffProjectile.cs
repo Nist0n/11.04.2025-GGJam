@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Settings.Audio;
 using UnityEngine;
 
 namespace Items
@@ -66,6 +67,7 @@ namespace Items
 
         private IEnumerator ShowHit()
         {
+            AudioManager.instance.PlaySfx("SkillHit");
             var temp = Instantiate(hitEffect, gameObject.transform.position, Quaternion.identity, _boss.transform);
             yield return new WaitForSeconds(1);
             Destroy(temp);

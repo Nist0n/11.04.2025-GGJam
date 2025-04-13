@@ -1,4 +1,5 @@
 ﻿using AI.BehaviourTree.Base;
+using Settings.Audio;
 using UnityEngine;
 
 namespace Bosses.Glass.BehaviourTree
@@ -11,6 +12,7 @@ namespace Bosses.Glass.BehaviourTree
         private int _projectileCount;
         private float _waveCooldown;
         private GameObject _projectile;
+        private AudioSource _laserSound;
 
         private BossDashController _dashController;
         private LaserController _laserController;
@@ -29,7 +31,7 @@ namespace Bosses.Glass.BehaviourTree
                           float waveCooldown, GameObject projectile,
                           float dashSpeed, float dashDuration,
                           int currentPhase, LaserController laserController,
-                          Animator animator)
+                          Animator animator, AudioSource laserSound)
         {
             _transform = transform;
             _playerTransform = playerTransform;
@@ -40,6 +42,7 @@ namespace Bosses.Glass.BehaviourTree
             _currentPhase = currentPhase;
             _laserController = laserController;
             _animator = animator;
+            _laserSound = laserSound;
             
             LayerMask wallMask = LayerMask.GetMask("Wall");
             _dashController = new BossDashController(_transform, wallMask, dashSpeed, dashDuration, _animator);
@@ -56,18 +59,22 @@ namespace Bosses.Glass.BehaviourTree
             if (r == 0)
             {
                 Charge();
+                _laserSound.enabled = false;
             }
             else if (r == 1)
             {
+                _laserSound.enabled = true;
                 Laser();
             }
             else if (r == 2)
             {
                 ShotgunWave();
+                _laserSound.enabled = false;
             }
             else
             {
                 ShootWave();
+                _laserSound.enabled = false;
             }
             return _state;
         }
@@ -78,11 +85,10 @@ namespace Bosses.Glass.BehaviourTree
             {
                 return;
             }
-            Debug.Log("lasering");
+            
             if (!_laserController.isLasering())
             {
                 _laserController.StartLasering();
-                
             }
             
             _laserController.UpdateLasering();
@@ -152,6 +158,7 @@ namespace Bosses.Glass.BehaviourTree
 
         private void ShootProjectile(Vector3 targetPosition)
         {
+            AudioManager.instance.PlaySfx("EyeBossShot");
             // Рассчитываем направление к игроку
             Vector3 direction = (targetPosition - _transform.position).normalized;
         
@@ -171,6 +178,8 @@ namespace Bosses.Glass.BehaviourTree
 
         private void Shotgun(int currentProjectile)
         {
+            AudioManager.instance.PlaySfx("EyeBossShot");
+            
             Vector3 baseDirection = (_playerTransform.position - _transform.position).normalized;
 
             float spreadAngle = 15f;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AI.BehaviourTree.Base;
 using Bosses.Glass.BehaviourTree;
+using Settings.Audio;
 using Static_Classes;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,6 +25,7 @@ namespace Bosses.Glass
         [SerializeField] private float dashDuration;
         [SerializeField] private float rotationSpeed;
         [SerializeField] private Animator animator;
+        [SerializeField] private AudioSource laserSound;
         
         private Node _rootNode;
 
@@ -35,6 +37,7 @@ namespace Bosses.Glass
         
         private void Start()
         {
+            StartCoroutine(PlayBattleMusic());
             _rootNode = SetupTree();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -59,7 +62,7 @@ namespace Bosses.Glass
                     intervalBetweenShots, projectileCount,
                     waveCooldown, projectile,
                     dashSpeed, dashDuration,
-                    _currentPhase, laserController, animator
+                    _currentPhase, laserController, animator, laserSound
                 )
             });
 
@@ -70,7 +73,7 @@ namespace Bosses.Glass
                     intervalBetweenShots - 0.05f, projectileCount * 2,
                     waveCooldown - 1, projectile,
                     dashSpeed * 1.5f, dashDuration - 0.1f,
-                    _currentPhase, laserController, animator
+                    _currentPhase, laserController, animator, laserSound
                 )
             });
 
@@ -105,6 +108,7 @@ namespace Bosses.Glass
         {
             health -= 1;
             Debug.Log(health);
+            AudioManager.instance.PlaySfx("HitEye");
             if (health <= 3)
             {
                 _currentPhase = 2;
@@ -150,6 +154,13 @@ namespace Bosses.Glass
             // animator.Play("Death"); - анимацию смерти нужно переделать тому, кто её делал
             yield return new WaitForSeconds(2.6f);
             Destroy(gameObject);
+        }
+        
+        private IEnumerator PlayBattleMusic()
+        {
+            AudioManager.instance.PlayMusic("ChestOpening");
+            yield return new WaitForSeconds(39);
+            AudioManager.instance.PlayMusic("ChestLoop");
         }
     }
 }

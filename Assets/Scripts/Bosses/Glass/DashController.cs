@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Settings.Audio;
+using UnityEngine;
 
 namespace Bosses.Glass
 {
@@ -37,6 +38,7 @@ namespace Bosses.Glass
             // Поворачиваем босса к цели
             _bossTransform.rotation = Quaternion.LookRotation(_dashDirection);
             _animator.Play("Dash");
+            AudioManager.instance.PlaySfx("EyeDash");
         }
 
         public void UpdateDash() {
