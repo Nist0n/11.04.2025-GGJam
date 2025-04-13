@@ -75,34 +75,16 @@ namespace Settings.Audio
             musicSource.Play();
         }
 
-        public void ShuffleMusic()
+        public float GetMusicClipLength(string musicName)
         {
-            List<Sound> playlist = music;
-            int n = playlist.Count;
+            Sound s = music.Find(x => x.name == musicName);
 
-            if (n < 1)
+            if (s == null)
             {
-                Debug.Log("Music is empty!");
-                return;
+                Debug.LogWarning("Music: " + musicName + " not found!");
             }
 
-            while (n > 1)
-            {
-                n--;
-                int k = Random.Range(0, n + 1);
-                (playlist[k], playlist[n]) = (playlist[n], playlist[k]);
-            }
-
-            StartCoroutine(PlayMusicPlaylist(playlist));
-        }
-
-        private IEnumerator PlayMusicPlaylist(List<Sound> playlist)
-        {
-            foreach (var song in playlist)
-            {
-                PlayMusic(song.name);
-                yield return new WaitForSeconds(song.clip.length);
-            }
+            return s.clip.length;
         }
     }
 }

@@ -159,9 +159,10 @@ namespace Bosses.Glass
         
         private IEnumerator PlayBattleMusic()
         {
-            AudioManager.instance.PlayMusic("ChestOpening");
-            yield return new WaitForSeconds(39);
-            AudioManager.instance.PlayMusic("ChestLoop");
+            AudioManager.instance.PlayMusic("EyeOpening");
+            float clipLength = AudioManager.instance.GetMusicClipLength("EyeOpening");
+            yield return new WaitForSeconds(clipLength);
+            AudioManager.instance.PlayMusic("EyeLoop");
         }
     }
 }

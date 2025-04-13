@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39795ac52a21b284fbe735c7c9404ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faderExample: {fileID: 0}
 --- !u!4 &157805414
 Transform:
   m_ObjectHideFlags: 0
@@ -292,6 +293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: sounds.Array.data[19].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: df8367ba30526f94c91b2d6d52409c32, type: 3}
     - target: {fileID: 8382585116806453342, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 546.5013
@@ -770,7 +775,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d0e932f8c8a78a74ea539f2cc63d979f, type: 2}
+  - {fileID: 2100000, guid: c9828f2042eeb194cb1e35867710d1fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
