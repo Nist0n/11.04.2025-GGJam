@@ -50,6 +50,11 @@ namespace Player
         
         private void Start()
         {
+            if (PlayerPrefs.HasKey("Sensitivity"))
+            {
+                mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
+            }
+            
             if (GameObject.FindGameObjectWithTag("BossChest"))
             {
                 _chest = GameObject.FindGameObjectWithTag("BossChest").GetComponent<Chest>();
