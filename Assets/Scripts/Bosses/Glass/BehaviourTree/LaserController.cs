@@ -123,7 +123,10 @@ namespace Bosses.Glass.BehaviourTree
             if (Physics.Raycast(_bossTransform.position, _bossTransform.forward,
                     out RaycastHit hit, laserLength))
             {
-                laserEnd = hit.point;
+                if (hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
+                {
+                    laserEnd = hit.point;
+                }
                 if (hit.collider.gameObject.CompareTag("Player"))
                 {
                     GameEvents.PlayerDeath?.Invoke();
@@ -132,7 +135,7 @@ namespace Bosses.Glass.BehaviourTree
 
             Vector3 laserStartPos = new Vector3(
                 _bossTransform.position.x,
-                _bossTransform.position.y + 0.2f,
+                _bossTransform.position.y + 0.3f,
                 _bossTransform.position.z
             );
             _lineRenderer.SetPosition(0, laserStartPos);
