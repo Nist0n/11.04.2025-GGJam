@@ -10,7 +10,8 @@ namespace Bosses.Chest.States
         {
             AudioManager.instance.PlaySfx("BossDied");
             Core.BossAnimator.Play("Death");
-            DestroyChest();
+            Core.DoorToNextLevel.SetActive(true);
+            StartCoroutine(DestroyChest());
         }
     
         public override void Do()
