@@ -31,6 +31,8 @@ namespace UI
 
         private void Start()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             _fader = FindFirstObjectByType<FaderExample>();
             AudioManager.instance.PlayMusic("MainMenu");
             AudioManager.instance.PlayAmbient("AmbientMenu");
