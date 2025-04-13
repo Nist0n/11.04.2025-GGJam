@@ -544,7 +544,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 524962887}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99928766
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1728,7 +1728,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 423469918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1007323544}
+        m_TargetAssemblyTypeName: GamePause, Assembly-CSharp
+        m_MethodName: ToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &423469918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2700,7 +2712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00024414062}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -102.59717}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &841282094 stripped
@@ -3242,7 +3254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseCanvas: {fileID: 1237610468}
   forbiddenScene: MainMenu
-  nameOfScene: 
+  nameOfScene: MainMenu
 --- !u!1 &1010093153
 GameObject:
   m_ObjectHideFlags: 0
