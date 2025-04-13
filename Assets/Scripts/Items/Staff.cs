@@ -2,6 +2,7 @@ using System;
 using Bosses;
 using Settings.Audio;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Items
 {
@@ -23,9 +24,13 @@ namespace Items
 
         private Camera _camera;
 
+        private InputAction _attackAction;
+        
         private void Start()
         {
             _camera = Camera.main;
+
+            _attackAction = InputSystem.actions.FindAction("Attack");
         }
 
         private void Update()
@@ -37,7 +42,7 @@ namespace Items
 
         private void OnLeftMouseButtonClick()
         {
-            if (Input.GetMouseButtonUp(0) && _isSkillActive) // Left button
+            if (_attackAction.IsPressed() && _isSkillActive) // Left button
             {
                 AudioManager.instance.PlaySfx("MagicShot");
                 ShootProjectile();
