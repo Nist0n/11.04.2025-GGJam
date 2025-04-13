@@ -171,6 +171,7 @@ namespace Bosses.Glass
         private IEnumerator WaitForDeathAnimation()
         {
             animator.Play("Death");
+            AudioManager.instance.PlaySfx("BossDied");
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(2.6f);
             GameEvents.BossCompleted?.Invoke();
