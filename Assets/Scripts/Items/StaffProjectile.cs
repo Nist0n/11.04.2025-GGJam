@@ -10,6 +10,7 @@ namespace Items
         [SerializeField] private float projectileSpeed;
         
         [SerializeField] private GameObject hitEffect;
+        [SerializeField] private GameObject damageText;
         
         private Vector3 _direction;
         
@@ -20,6 +21,8 @@ namespace Items
         private const float TimeToDeath = 5;
 
         private GameObject _boss;
+
+        private bool _hit;
 
         private void Start()
         {
@@ -59,6 +62,11 @@ namespace Items
         
         private void OnTriggerEnter(Collider other)
         {
+            if (_hit)
+            {
+                return;
+            }
+            _hit = true;
             if (other.CompareTag("BossGlass") || other.CompareTag("BossChest"))
             {
                 StartCoroutine(ShowHit());
@@ -69,9 +77,12 @@ namespace Items
         {
             AudioManager.instance.PlaySfx("SkillHit");
             var temp = Instantiate(hitEffect, gameObject.transform.position, Quaternion.identity, _boss.transform);
+            var damagePopup = Instantiate(damageText, gameObject.transform.position, Quaternion.identity, _boss.transform);
             yield return new WaitForSeconds(1);
             Destroy(temp);
+            Destroy(damagePopup);
             DestroyProjectile();
+            _hit = false;
         }
     }
 }
