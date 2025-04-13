@@ -119,6 +119,7 @@ namespace Bosses.Glass
         private void ReceiveDamage()
         {
             _health -= 1;
+            GameEvents.BossDamaged?.Invoke();
             Debug.Log(_health);
             AudioManager.instance.PlaySfx("HitEye");
             if (_health <= maxHealth / 2)
