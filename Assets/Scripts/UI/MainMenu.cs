@@ -41,7 +41,6 @@ namespace UI
         {
             AudioManager.instance.PlaySfx("Click");
             _fader.LoadScene("Room");
-            AudioManager.instance.PlayMusic("ChestOpening");
             AudioManager.instance.PlayAmbient("Ambient");
         }
 
