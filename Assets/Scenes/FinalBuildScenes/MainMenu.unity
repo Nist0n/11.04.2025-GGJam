@@ -2691,6 +2691,7 @@ GameObject:
   - component: {fileID: 1007323542}
   - component: {fileID: 1007323541}
   - component: {fileID: 1007323540}
+  - component: {fileID: 1007323543}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2724,7 +2725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39795ac52a21b284fbe735c7c9404ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faderExample: {fileID: 0}
+  faderExample: {fileID: 1007323543}
 --- !u!4 &1007323542
 Transform:
   m_ObjectHideFlags: 0
@@ -2742,6 +2743,18 @@ Transform:
   - {fileID: 1237610469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007323543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007323539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f279695c91383b34f88a42ef5cbf1f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1010093153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,7 +3588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1237610469
 RectTransform:
   m_ObjectHideFlags: 0
