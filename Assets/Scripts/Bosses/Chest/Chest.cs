@@ -50,7 +50,17 @@ namespace Bosses.Chest
                 return;
             }
             
-            Health = Mathf.Clamp(Health, 0, MaxHealth);
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
+            direction.y = 0; // (Опционально, если вращение должно быть только по горизонтали)
+            
+            // Вычисляем угол поворота (в градусах) + смещение
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + 90;
+            
+            // Плавный поворот через Quaternion
+            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+            Quaternion newRotation = Quaternion.Slerp(Rb.rotation, targetRotation, 5 * Time.fixedDeltaTime);
+            
+            Rb.MoveRotation(newRotation); 
             
             CheckNextAttackTimer();
 
@@ -133,7 +143,7 @@ namespace Bosses.Chest
         public void ReceiveDamage()
         {
             Health -= 2;
-            AudioManager.instance.PlaySfx("RandomChestSound1");
+            AudioManager.instance.PlaySfx("ChestHit");
         }
         
         private void OnTriggerEnter(Collider other)
