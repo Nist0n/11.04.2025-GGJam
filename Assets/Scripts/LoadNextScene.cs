@@ -4,15 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadNextScene : MonoBehaviour
 {
-    private void Start()
-    {
-        var _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Collision>();
-        Debug.Log(_player);
-    }
 
-    public void OnCollisionEnter(Collision _player)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Wark");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }
