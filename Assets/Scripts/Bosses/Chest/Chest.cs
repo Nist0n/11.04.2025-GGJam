@@ -159,6 +159,8 @@ namespace Bosses.Chest
         private IEnumerator PlayBattleMusic()
         {
             AudioManager.instance.PlayMusic("ChestOpening");
+            yield return new WaitForSeconds(1);
+            AudioManager.instance.PlaySfx("Replica");
             float clipLength = AudioManager.instance.GetMusicClipLength("ChestOpening");
             yield return new WaitForSeconds(clipLength);
             AudioManager.instance.PlayMusic("ChestLoop");

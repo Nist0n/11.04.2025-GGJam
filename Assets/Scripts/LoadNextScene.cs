@@ -10,7 +10,6 @@ public class LoadNextScene : MonoBehaviour
     private FaderExample _fader;
 
     [SerializeField] private string nameOfScene;
-    
 
     private void Start()
     {
@@ -19,9 +18,9 @@ public class LoadNextScene : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AudioManager.instance.PlaySfx("OpenDoor");
         if (other.CompareTag("Player"))
         {
+            AudioManager.instance.PlaySfx("OpenDoor");
             _fader.LoadScene(nameOfScene);
         }
     }

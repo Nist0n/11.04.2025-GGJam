@@ -250,9 +250,21 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: sounds.Array.size
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: sounds.Array.data[19].clip
       value: 
       objectReference: {fileID: 8300000, guid: df8367ba30526f94c91b2d6d52409c32, type: 3}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: sounds.Array.data[23].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4175318728984e8498ef7c2211a292d3, type: 3}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: sounds.Array.data[23].name
+      value: Replica
+      objectReference: {fileID: 0}
     - target: {fileID: 8382585116806453342, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 546.5013

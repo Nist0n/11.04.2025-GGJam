@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Settings.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ namespace GameControl
         public string text;
         public float duration = 5f; // Общее время слайда
         public float textSpeed = 0.05f; // Задержка между буквами
+        public AudioClip clip;
     }
 
     public List<CutsceneSlide> slides;
@@ -46,6 +48,11 @@ namespace GameControl
             // Плавное появление нового слайда
             displayImage.sprite = slide.image;
             displayText.text = "";
+
+            if (slide.clip)
+            {
+                AudioManager.instance.PlaySfx(slide.clip.name);
+            }
 
             // Постепенный вывод текста
             float timePerChar = slide.textSpeed;
