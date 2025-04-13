@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: sounds.Array.data[23].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 5d2cc2572f541654c80ea1b3f38f18a3, type: 3}
+      objectReference: {fileID: 8300000, guid: 4175318728984e8498ef7c2211a292d3, type: 3}
     - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: sounds.Array.data[23].name
       value: Replica
