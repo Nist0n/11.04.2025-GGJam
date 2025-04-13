@@ -2303,7 +2303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417f3de813e5430889b2733f416c8dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 6
+  maxHealth: 2
   playerTransform: {fileID: 834854560}
   targetTransform: {fileID: 197172811}
   projectile: {fileID: 6127698344145723181, guid: 2cad9b3ebcdfd464ba3d3511c2cc0d9c, type: 3}

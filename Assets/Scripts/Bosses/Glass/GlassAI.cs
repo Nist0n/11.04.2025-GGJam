@@ -12,7 +12,7 @@ namespace Bosses.Glass
 {
     public class GlassAI : AI.BehaviourTree.Base.BehaviourTree
     {
-        [SerializeField] private float health;
+        [SerializeField] private int maxHealth;
         
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform targetTransform;
@@ -35,12 +35,23 @@ namespace Bosses.Glass
 
         private int _currentPhase = 1;
         
+        private int _health;
+        
         private void Start()
         {
             StartCoroutine(PlayBattleMusic());
             _rootNode = SetupTree();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            if (PlayerPrefs.GetInt("SecondPhaseStart") == 1)
+            {
+                _health = maxHealth / 2;
+                StartSecondPhase();
+            }
+            else
+            {
+                _health = maxHealth;
+            }
         }
 
         protected override Node SetupTree()
@@ -97,7 +108,7 @@ namespace Bosses.Glass
 
         private void Update()
         {
-            if (_rigidbody.constraints == RigidbodyConstraints.FreezeAll)
+            if (_rigidbody.constraints == RigidbodyConstraints.FreezeAll || _health == 0)
             {
                 return;
             }
@@ -106,19 +117,25 @@ namespace Bosses.Glass
 
         private void ReceiveDamage()
         {
-            health -= 1;
-            Debug.Log(health);
+            _health -= 1;
+            Debug.Log(_health);
             AudioManager.instance.PlaySfx("HitEye");
-            if (health <= 3)
+            if (_health <= maxHealth / 2)
             {
-                _currentPhase = 2;
-                _rootNode = SetupTree();
+                StartSecondPhase();
             }
 
-            if (health <= 0)
+            if (_health <= 0)
             {
                 StartCoroutine(WaitForDeathAnimation());
             }
+        }
+
+        private void StartSecondPhase()
+        {
+            _currentPhase = 2;
+            _rootNode = SetupTree();
+            GameEvents.SecondPhaseAchieved?.Invoke();
         }
         
         private void OnTriggerEnter(Collider other)
@@ -153,7 +170,9 @@ namespace Bosses.Glass
         private IEnumerator WaitForDeathAnimation()
         {
             // animator.Play("Death"); - анимацию смерти нужно переделать тому, кто её делал
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(2.6f);
+            GameEvents.BossCompleted?.Invoke();
             Destroy(gameObject);
         }
         
