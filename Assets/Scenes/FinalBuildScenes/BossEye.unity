@@ -925,6 +925,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2218799223997181640, guid: ad1490f29de97e64b8faaa6704ebd2a2, type: 3}
+      propertyPath: maxHealth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2218799223997181640, guid: ad1490f29de97e64b8faaa6704ebd2a2, type: 3}
+      propertyPath: rotationSpeed
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2218799223997181640, guid: ad1490f29de97e64b8faaa6704ebd2a2, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1187452090}

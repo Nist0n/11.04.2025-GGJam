@@ -39,6 +39,7 @@ namespace Bosses.Glass
         
         private void Start()
         {
+            StartCoroutine(Stun());
             StartCoroutine(PlayBattleMusic());
             _rootNode = SetupTree();
             Cursor.visible = false;
