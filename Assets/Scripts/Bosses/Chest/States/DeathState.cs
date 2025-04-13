@@ -1,3 +1,4 @@
+using Settings.Audio;
 using UnityEngine;
 
 namespace Bosses.Chest.States
@@ -6,6 +7,7 @@ namespace Bosses.Chest.States
     {
         public override void Enter()
         {
+            AudioManager.instance.PlaySfx("BossDied");
             Core.BossAnimator.Play("Death");
         }
     

@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using GameControl;
+using Settings.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,7 @@ public class LoadNextScene : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        AudioManager.instance.PlaySfx("OpenDoor");
         if (other.CompareTag("Player"))
         {
             _fader.LoadScene(nameOfScene);
