@@ -6,6 +6,7 @@ using Settings.Audio;
 using Static_Classes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -23,6 +24,8 @@ namespace Player
         [SerializeField] private AudioSource run;
 
         [SerializeField] private float distanceToGround;
+        [SerializeField] private Image dashImage;
+        
         
 
         private const float Gravity = -9.81f;
@@ -33,7 +36,8 @@ namespace Player
         private bool _dashing;
         private bool _isGameLost;
         private bool _isTakingCoin;
-        
+        private float _dashtimer;
+      
         private InputAction _moveAction;
         private InputAction _lookAction;
         private InputAction _jumpAction;
@@ -80,6 +84,13 @@ namespace Player
             if (_isGameLost)
             {
                 return;
+            }
+
+            if (_dashing)
+            {
+                _dashtimer += Time.deltaTime;
+                var percent = (dashCooldown - _dashtimer) / dashCooldown;
+                dashImage.fillAmount = percent;
             }
             
             Look();
@@ -160,6 +171,7 @@ namespace Player
         private IEnumerator Dash()
         {
             _dashing = true;
+            _dashtimer = 0;
             AudioManager.instance.PlaySfx("Dash");
             float startTime = Time.time;
 
