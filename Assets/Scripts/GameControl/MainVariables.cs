@@ -29,6 +29,7 @@ namespace GameControl
             if (_instance == null)
             {
                 _instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
