@@ -90,6 +90,7 @@ namespace GameControl
         // Переход на другую сцену или отключение Canvas
         Debug.Log("Cutscene ended!");
         gameObject.SetActive(false);
+        AudioManager.instance.musicSource.Stop();
         // SceneManager.LoadScene("GameScene");
     }
     }
