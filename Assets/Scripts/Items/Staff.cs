@@ -14,8 +14,9 @@ namespace Items
         [SerializeField] private float timeToReset;
 
         [SerializeField] private float projectileSpeed;
-        
 
+        [SerializeField] private GameObject lightPoint;
+        
         private float _timer;
 
         private bool _isSkillActive = true;
@@ -29,6 +30,7 @@ namespace Items
 
         private void Update()
         {
+            lightPoint.SetActive(_isSkillActive);
             SkillCooldown();
             OnLeftMouseButtonClick();
         }
