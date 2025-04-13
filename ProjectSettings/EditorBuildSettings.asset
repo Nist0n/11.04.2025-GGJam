@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChestScene.unity
     guid: f7d479771790eed47a372b4738ef0d1d
+  - enabled: 1
+    path: Assets/Scenes/FinalBuildScenes/BossChest.unity
+    guid: 214b0ee114bc4814987c5a21f82d199d
+  - enabled: 1
+    path: Assets/Scenes/FinalBuildScenes/BossEye.unity
+    guid: ab2d2714b22f2f24a89def35928e65f8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

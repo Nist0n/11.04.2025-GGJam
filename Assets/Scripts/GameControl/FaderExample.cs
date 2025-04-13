@@ -49,14 +49,17 @@ namespace GameControl
             while (waitFading) yield return null;
 
             var async = SceneManager.LoadSceneAsync(sceneName);
-            async.allowSceneActivation = false;
-
-            while (async.progress < 0.9f)
+            if (async != null)
             {
-                yield return null;
-            }
+                async.allowSceneActivation = false;
 
-            async.allowSceneActivation = true;
+                while (async.progress < 0.9f)
+                {
+                    yield return null;
+                }
+
+                async.allowSceneActivation = true;
+            }
 
             waitFading = true;
             Fade.instance.FadeOut(() => waitFading = false);

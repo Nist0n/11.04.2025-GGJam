@@ -1,3 +1,4 @@
+using GameControl;
 using Settings.Audio;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,9 @@ namespace UI
 
         [SerializeField] private GameObject controlButtons;
         [SerializeField] private GameObject settingsUI;
+
+        private FaderExample _fader;
+        
         
         private void Awake()
         {
@@ -27,6 +31,7 @@ namespace UI
 
         private void Start()
         {
+            _fader = FindFirstObjectByType<FaderExample>();
             AudioManager.instance.PlayMusic("MainMenu");
             AudioManager.instance.PlayAmbient("AmbientMenu");
             settingsUI.SetActive(false);
@@ -35,8 +40,8 @@ namespace UI
         private void PlayGame()
         {
             AudioManager.instance.PlaySfx("Click");
-            SceneManager.LoadScene(1);
-            AudioManager.instance.PlayMusic("ChestOpening");
+            _fader.LoadScene("Room");
+            AudioManager.instance.musicSource.Stop();
             AudioManager.instance.PlayAmbient("Ambient");
         }
 
