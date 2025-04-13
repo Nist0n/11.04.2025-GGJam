@@ -176,6 +176,7 @@ namespace Bosses.Glass
         {
             animator.Play("Death");
             AudioManager.instance.PlaySfx("BossDied");
+            AudioManager.instance.PlayMusic("WinnerOpening");
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(2.6f);
             GameEvents.BossCompleted?.Invoke();
