@@ -20,6 +20,16 @@ namespace Environment
             newPos.y += 15;
 
             projectile.transform.DOMove(newPos, 1.5f);
+            StartCoroutine(DestroyProjectile(projectile));
+        }
+
+        private IEnumerator DestroyProjectile(GameObject projectile)
+        {
+            yield return new WaitForSeconds(3);
+            if (projectile)
+            {
+                Destroy(projectile);
+            }
         }
     }
 }

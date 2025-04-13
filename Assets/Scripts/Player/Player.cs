@@ -27,7 +27,6 @@ namespace Player
         private CharacterController _characterController;
         private Vector3 _velocity;
         private Transform _cameraTransform;
-        private bool _grounded;
         private bool _dashing;
         private bool _isGameLost;
         private bool _isTakingCoin;
@@ -148,31 +147,31 @@ namespace Player
             {
                 StartCoroutine(Dash());
             }
+        }
+        
+        private IEnumerator Dash()
+        {
+            _dashing = true;
+            AudioManager.instance.PlaySfx("Dash");
+            float startTime = Time.time;
 
-            IEnumerator Dash()
+            while (Time.time < startTime + dashTime)
             {
-                _dashing = true;
-                AudioManager.instance.PlaySfx("Dash");
-                float startTime = Time.time;
-
-                while (Time.time < startTime + dashTime)
+                Vector2 moveVector = _moveAction.ReadValue<Vector2>();
+                Vector3 direction = new Vector3(moveVector.x, 0f, moveVector.y).normalized;
+                if (direction.magnitude >= 0.1f)
                 {
-                    Vector2 moveVector = _moveAction.ReadValue<Vector2>();
-                    Vector3 direction = new Vector3(moveVector.x, 0f, moveVector.y).normalized;
-                    if (direction.magnitude >= 0.1f)
-                    {
-                        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
-                        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
+                    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                         
-                        _characterController.Move(moveDir * (dashSpeed * Time.deltaTime));
-                    }
-                    
-                    yield return null;
+                    _characterController.Move(moveDir * (dashSpeed * Time.deltaTime));
                 }
-                
-                yield return new WaitForSeconds(dashCooldown);
-                _dashing = false;
+                    
+                yield return null;
             }
+                
+            yield return new WaitForSeconds(dashCooldown);
+            _dashing = false;
         }
         
         private void OnTriggerEnter(Collider other)

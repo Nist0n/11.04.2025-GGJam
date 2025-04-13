@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - Spell
   - Trap
+  - Ground
   layers:
   - Default
   - TransparentFX
