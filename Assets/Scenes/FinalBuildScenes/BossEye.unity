@@ -929,10 +929,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1249915085}
     - target: {fileID: 2218799223997181640, guid: ad1490f29de97e64b8faaa6704ebd2a2, type: 3}
-      propertyPath: maxHealth
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2218799223997181640, guid: ad1490f29de97e64b8faaa6704ebd2a2, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1187452090}
