@@ -162,14 +162,14 @@ namespace Bosses.Glass
             animator.Play("Eye Close");
             _agent.isStopped = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2.5f);
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _agent.isStopped = false;
         }
 
         private IEnumerator WaitForDeathAnimation()
         {
-            // animator.Play("Death"); - анимацию смерти нужно переделать тому, кто её делал
+            animator.Play("Death");
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(2.6f);
             GameEvents.BossCompleted?.Invoke();

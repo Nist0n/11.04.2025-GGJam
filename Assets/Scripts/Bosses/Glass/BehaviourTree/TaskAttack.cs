@@ -158,6 +158,7 @@ namespace Bosses.Glass.BehaviourTree
 
         private void ShootProjectile(Vector3 targetPosition)
         {
+            _animator.Play("Attack");
             AudioManager.instance.PlaySfx("EyeBossShot");
             // Рассчитываем направление к игроку
             Vector3 direction = (targetPosition - _transform.position).normalized;
@@ -178,6 +179,7 @@ namespace Bosses.Glass.BehaviourTree
 
         private void Shotgun(int currentProjectile)
         {
+            _animator.Play("Attack");
             AudioManager.instance.PlaySfx("EyeBossShot");
             
             Vector3 baseDirection = (_playerTransform.position - _transform.position).normalized;
