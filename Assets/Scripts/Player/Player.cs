@@ -21,7 +21,6 @@ namespace Player
         [SerializeField] private float dashCooldown;
         [SerializeField] private AudioSource steps;
         [SerializeField] private AudioSource run;
-        
 
         private const float Gravity = -9.81f;
         
