@@ -31,6 +31,8 @@ namespace GameControl
 
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         skipButton.onClick.AddListener(SkipCutscene);
         StartCutscene();
     }
@@ -89,6 +91,8 @@ namespace GameControl
     {
         // Переход на другую сцену или отключение Canvas
         Debug.Log("Cutscene ended!");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         AudioManager.instance.sfxSource.Stop();
         gameObject.SetActive(false);
         // SceneManager.LoadScene("GameScene");
