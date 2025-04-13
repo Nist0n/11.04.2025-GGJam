@@ -12,6 +12,8 @@ namespace UI
         
         private void ShowLoseUI()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             loseUI.SetActive(true);
             if (PlayerPrefs.GetInt("SecondPhaseAchieved") == 1)
             {

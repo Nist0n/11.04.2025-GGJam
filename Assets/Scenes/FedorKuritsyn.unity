@@ -1955,6 +1955,7 @@ GameObject:
   - component: {fileID: 2434465728169727755}
   - component: {fileID: 7492288874545273881}
   - component: {fileID: 1827278666224535107}
+  - component: {fileID: 7492288874545273882}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3009,6 +3010,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39795ac52a21b284fbe735c7c9404ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faderExample: {fileID: 7492288874545273882}
+--- !u!114 &7492288874545273882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548311275343985692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f279695c91383b34f88a42ef5cbf1f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7498475497515141312

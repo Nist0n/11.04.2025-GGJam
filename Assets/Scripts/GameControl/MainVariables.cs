@@ -7,6 +7,8 @@ namespace GameControl
     public class MainVariables : MonoBehaviour
     {
         private static MainVariables _instance;
+        
+        [SerializeField] private FaderExample faderExample;
 
         private void SetOnSecondPhaseAchieved() => PlayerPrefs.SetInt("SecondPhaseAchieved", 1);
 
