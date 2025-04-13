@@ -28,6 +28,7 @@ namespace Bosses.Glass
         private NavMeshAgent _agent;
         private Transform _transform;
         private Rigidbody _rigidbody;
+        private Animator _animator;
 
         private int _currentPhase = 1;
         
@@ -43,6 +44,7 @@ namespace Bosses.Glass
             _agent = GetComponent<NavMeshAgent>();
             LineRenderer lineRenderer = GetComponent<LineRenderer>();
             _rigidbody = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
             
             _transform = transform;
             
@@ -57,7 +59,7 @@ namespace Bosses.Glass
                     intervalBetweenShots, projectileCount,
                     waveCooldown, projectile,
                     dashSpeed, dashDuration,
-                    _currentPhase, laserController
+                    _currentPhase, laserController, _animator
                 )
             });
 
@@ -68,7 +70,7 @@ namespace Bosses.Glass
                     intervalBetweenShots - 0.05f, projectileCount * 2,
                     waveCooldown - 1, projectile,
                     dashSpeed * 1.5f, dashDuration - 0.1f,
-                    _currentPhase, laserController
+                    _currentPhase, laserController, _animator
                 )
             });
 
@@ -108,6 +110,11 @@ namespace Bosses.Glass
                 _currentPhase = 2;
                 _rootNode = SetupTree();
             }
+
+            if (health <= 0)
+            {
+                StartCoroutine(WaitForDeathAnimation());
+            }
         }
         
         private void OnTriggerEnter(Collider other)
@@ -131,11 +138,19 @@ namespace Bosses.Glass
 
         private IEnumerator Stun()
         {
+            _animator.Play("Eye Close");
             _agent.isStopped = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(3f);
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _agent.isStopped = false;
+        }
+
+        private IEnumerator WaitForDeathAnimation()
+        {
+            _animator.Play("Death");
+            yield return new WaitForSeconds(2.6f);
+            Destroy(gameObject);
         }
     }
 }
