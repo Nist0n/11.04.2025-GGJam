@@ -331,6 +331,7 @@ MonoBehaviour:
   dashCooldown: 2
   steps: {fileID: 6444207229258258304}
   run: {fileID: 1791482521022754123}
+  distanceToGround: 1.11
 --- !u!195 &3539826885917909392
 NavMeshAgent:
   m_ObjectHideFlags: 0

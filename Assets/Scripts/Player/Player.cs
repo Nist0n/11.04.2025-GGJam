@@ -22,6 +22,9 @@ namespace Player
         [SerializeField] private AudioSource steps;
         [SerializeField] private AudioSource run;
 
+        [SerializeField] private float distanceToGround;
+        
+
         private const float Gravity = -9.81f;
         
         private CharacterController _characterController;
@@ -41,6 +44,8 @@ namespace Player
         private float _moveSpeed;
         private Chest _chest;
 
+        private bool _grounded = true;
+        
         private void SetOnPlayerDeath()
         {
             _isGameLost = true;
@@ -124,7 +129,7 @@ namespace Player
                 _velocity.y = -2f;
             }
 
-            if (moveValue.x == 0 && moveValue.y == 0)
+            if (moveValue is { x: 0, y: 0 })
             {
                 run.enabled = false;
                 steps.enabled = false;
@@ -134,8 +139,11 @@ namespace Player
             
             _characterController.Move(move * (_moveSpeed * Time.deltaTime));
             
-            if (_jumpAction.IsPressed() && _characterController.isGrounded)
+            _grounded = Physics.Raycast(transform.position, Vector3.down, distanceToGround);
+            
+            if (_jumpAction.IsPressed() && _grounded)
             {
+                _grounded = false;
                 AudioManager.instance.PlaySfx("PlayerJump");
                 _velocity.y = jumpForce;
             }
