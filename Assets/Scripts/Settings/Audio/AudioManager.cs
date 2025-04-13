@@ -9,7 +9,7 @@ namespace Settings.Audio
     {
         public static AudioManager instance;
 
-        [SerializeField] private AudioSource sfxSource;
+        [SerializeField] public AudioSource sfxSource;
         [SerializeField] public AudioSource musicSource;
         [SerializeField] private AudioSource ambientSource;
         [SerializeField] private List<Sound> music, sounds, ambient;
