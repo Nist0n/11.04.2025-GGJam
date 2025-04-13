@@ -14,10 +14,16 @@ namespace Bosses
 
         private void Start()
         {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = maxHealth;
-        }
+            _health = maxHealth;
+            if (PlayerPrefs.GetInt("SecondPhaseStart") == 1)
+            {
+                _health = maxHealth / 2;
+            }
 
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = _health;
+        }
+        
         private void OnEnable()
         {
             GameEvents.BossDamaged += OnReceiveDamage;
@@ -32,6 +38,10 @@ namespace Bosses
         {
             _health--;
             healthSlider.value--;
+            if (_health <= 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

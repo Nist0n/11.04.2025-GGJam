@@ -26,6 +26,8 @@ namespace Bosses.Glass
         [SerializeField] private float rotationSpeed;
         [SerializeField] private Animator animator;
         [SerializeField] private AudioSource laserSound;
+        [SerializeField] private GameObject finalDoor;
+        
         
         private Node _rootNode;
 
@@ -178,6 +180,7 @@ namespace Bosses.Glass
             yield return new WaitForSeconds(2.6f);
             GameEvents.BossCompleted?.Invoke();
             Destroy(gameObject);
+            finalDoor.SetActive(true);
         }
         
         private IEnumerator PlayBattleMusic()
