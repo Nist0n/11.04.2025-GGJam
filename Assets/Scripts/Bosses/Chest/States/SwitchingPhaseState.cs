@@ -7,13 +7,16 @@ namespace Bosses.Chest.States
     {
         [SerializeField] private float timeToPhase2 = 7f;
 
+        [SerializeField] private GameObject from;
+        
+
         private float _timerToShoot;
 
         private float _timerToPhase2;
         
         public override void Enter()
         {
-            //Core.BossAnimator.SetTrigger("AttackPhase");
+            Core.BossAnimator.Play("SwitchingPhase");
             _timerToPhase2 = Time.deltaTime;
             _timerToShoot = Time.deltaTime;
         }
@@ -50,8 +53,8 @@ namespace Bosses.Chest.States
             
             var projectile = Instantiate(
                 Core.ProjectilePrefab, 
-                Core.transform.position, 
-                Quaternion.LookRotation(direction));
+                from.transform.position, 
+                Quaternion.identity);
             projectile.GetComponent<Projectile>().SetDirection(direction);
         }
     }

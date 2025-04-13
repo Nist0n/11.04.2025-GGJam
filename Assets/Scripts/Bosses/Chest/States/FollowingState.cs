@@ -7,7 +7,7 @@ namespace Bosses.Chest.States
     {
         public override void Enter()
         {
-            //Core.BossAnimator.SetBool("IsMoving", true);
+            
         }
     
         public override void Do()
@@ -21,7 +21,7 @@ namespace Bosses.Chest.States
         
         public override void Exit()
         {
-            //Core.BossAnimator.SetBool("IsMoving", false);
+            
         }
         
         private void JumpTowardsPlayer()
@@ -32,8 +32,6 @@ namespace Bosses.Chest.States
             direction.y = 0;
             
             Core.Rb.AddForce(direction * Core.Speed + Vector3.up * Core.JumpForce, ForceMode.Impulse);
-            
-            //Core.BossAnimator.SetTrigger("Jump");
         }
     }
 }
