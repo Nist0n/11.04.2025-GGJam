@@ -18,6 +18,8 @@ namespace UI
 
         private void Start()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             tryAgainButton.onClick.AddListener(OnButtonClickTryAgain);
             tryAgainOnSecondPhaseButton.onClick.AddListener(OnButtonClickTryAgainOnSecondPhase);
         }
@@ -27,6 +29,8 @@ namespace UI
             PlayerPrefs.SetInt("SecondPhaseStart", 1);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             loseUI.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         
         private void OnButtonClickTryAgain()
@@ -34,6 +38,8 @@ namespace UI
             PlayerPrefs.SetInt("SecondPhaseStart", 0);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             loseUI.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }
