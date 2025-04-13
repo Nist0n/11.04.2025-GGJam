@@ -36,6 +36,7 @@ namespace Bosses.Glass
             
             // Поворачиваем босса к цели
             _bossTransform.rotation = Quaternion.LookRotation(_dashDirection);
+            _animator.Play("Dash");
         }
 
         public void UpdateDash() {

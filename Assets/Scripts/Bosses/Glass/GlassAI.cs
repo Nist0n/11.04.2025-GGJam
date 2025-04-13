@@ -5,6 +5,7 @@ using Bosses.Glass.BehaviourTree;
 using Static_Classes;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Bosses.Glass
 {
@@ -22,13 +23,13 @@ namespace Bosses.Glass
         [SerializeField] private float dashSpeed;
         [SerializeField] private float dashDuration;
         [SerializeField] private float rotationSpeed;
+        [SerializeField] private Animator animator;
         
         private Node _rootNode;
 
         private NavMeshAgent _agent;
         private Transform _transform;
         private Rigidbody _rigidbody;
-        private Animator _animator;
 
         private int _currentPhase = 1;
         
@@ -44,7 +45,6 @@ namespace Bosses.Glass
             _agent = GetComponent<NavMeshAgent>();
             LineRenderer lineRenderer = GetComponent<LineRenderer>();
             _rigidbody = GetComponent<Rigidbody>();
-            _animator = GetComponent<Animator>();
             
             _transform = transform;
             
@@ -59,7 +59,7 @@ namespace Bosses.Glass
                     intervalBetweenShots, projectileCount,
                     waveCooldown, projectile,
                     dashSpeed, dashDuration,
-                    _currentPhase, laserController, _animator
+                    _currentPhase, laserController, animator
                 )
             });
 
@@ -70,7 +70,7 @@ namespace Bosses.Glass
                     intervalBetweenShots - 0.05f, projectileCount * 2,
                     waveCooldown - 1, projectile,
                     dashSpeed * 1.5f, dashDuration - 0.1f,
-                    _currentPhase, laserController, _animator
+                    _currentPhase, laserController, animator
                 )
             });
 
@@ -138,17 +138,16 @@ namespace Bosses.Glass
 
         private IEnumerator Stun()
         {
-            _animator.Play("Eye Close");
+            animator.Play("Eye Close");
             _agent.isStopped = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(3f);
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _agent.isStopped = false;
         }
 
         private IEnumerator WaitForDeathAnimation()
         {
-            _animator.Play("Death");
+            // animator.Play("Death"); - анимацию смерти нужно переделать тому, кто её делал
             yield return new WaitForSeconds(2.6f);
             Destroy(gameObject);
         }
