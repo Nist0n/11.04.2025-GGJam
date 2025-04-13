@@ -8,6 +8,8 @@ namespace Bosses.Chest
     public abstract class Core : MonoBehaviour
     {
         public GameObject ProjectilePrefab;
+
+        public GameObject DoorToNextLevel;
         
         public Coin CoinPrefab;
 

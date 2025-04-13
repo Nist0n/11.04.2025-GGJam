@@ -269,7 +269,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0259, y: 4.736, z: -21.99}
-  m_LocalScale: {x: 30.030499, y: 9.571185, z: 0.01665095}
+  m_LocalScale: {x: 30.030499, y: 52.159134, z: 0.01665095}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1481102223}
@@ -377,7 +377,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -0.0316, y: 4.7385, z: 7.95}
-  m_LocalScale: {x: 29.954334, y: 9.576572, z: 0.01665095}
+  m_LocalScale: {x: 29.954334, y: 52.18849, z: 0.01665095}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1481102223}
@@ -630,6 +630,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &375564870 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5413209445873675077, guid: 74ac0a975a7932e47b1513d7fcb7ea52, type: 3}
+  m_PrefabInstance: {fileID: 120755467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &639383095
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +664,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -14.99, y: 4.7615, z: -7.0163}
-  m_LocalScale: {x: 30.010456, y: 9.622424, z: 0.01665095}
+  m_LocalScale: {x: 30.010456, y: 52.438366, z: 0.01665095}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1481102223}
@@ -766,7 +771,7 @@ Transform:
   m_GameObject: {fileID: 856090686}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0294, y: 9.51, z: -7.0232}
+  m_LocalPosition: {x: -0.0294, y: 30.59, z: -7.0232}
   m_LocalScale: {x: 29.938198, y: 0.0256, z: 29.961678}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1391,7 +1396,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 14.97, y: 4.7685, z: -6.9837}
-  m_LocalScale: {x: 30.147917, y: 9.636372, z: 0.01665095}
+  m_LocalScale: {x: 30.147917, y: 52.514374, z: 0.01665095}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1481102223}
@@ -1482,6 +1487,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChestBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 5147206418498125715, guid: a0a9f399ae2590742af64d3927672627, type: 3}
+      propertyPath: DoorToNextLevel
+      value: 
+      objectReference: {fileID: 375564870}
     - target: {fileID: 7410866898539058073, guid: a0a9f399ae2590742af64d3927672627, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.04
