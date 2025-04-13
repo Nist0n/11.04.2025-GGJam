@@ -408,7 +408,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 524962887}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9994033
+  m_Size: 0.9954935
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1631,7 +1631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.055908203}
+  m_AnchoredPosition: {x: 0, y: 0.0007324219}
   m_SizeDelta: {x: 0, y: -102.59717}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &841282094 stripped
@@ -4873,8 +4873,28 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: music.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: ambient.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: music.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 767208833462ebf4a9c644c61e61db60, type: 3}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: music.Array.data[5].name
+      value: WinnerOpening
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: music.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3be2bc1bd0d699d41b194ebf7f8f2e38, type: 3}
+    - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
+      propertyPath: music.Array.data[6].name
+      value: WinnerLoop
       objectReference: {fileID: 0}
     - target: {fileID: 4117910388053159093, guid: 246a07ccb0daba54e991149da65ebf62, type: 3}
       propertyPath: ambient.Array.data[1].clip
