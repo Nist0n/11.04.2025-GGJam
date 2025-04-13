@@ -146,6 +146,7 @@ namespace Bosses.Glass
             _agent.isStopped = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(3f);
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _agent.isStopped = false;
         }
 
