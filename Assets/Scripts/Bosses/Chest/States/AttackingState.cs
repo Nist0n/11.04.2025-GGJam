@@ -21,7 +21,7 @@ namespace Bosses.Chest.States
         public override void Enter()
         {
             _coinsToSpawn = Random.Range(Core.MinCoinsToDrop, Core.MaxCoinsToDrop);
-            //Core.BossAnimator.SetTrigger("PrepareAttack");
+            Core.BossAnimator.Play("Jump");
             _predictedTarget = Core.Player.transform.position;
             _attackStartTime = Time.time;
             _isAirborne = false;
@@ -45,13 +45,11 @@ namespace Bosses.Chest.States
         
         public override void Exit()
         {
-            //Core.BossAnimator.ResetTrigger("Attack");
+            
         }
 
         private void LaunchAttack()
         {
-            //Core.BossAnimator.SetTrigger("Attack");
-            
             AudioManager.instance.PlaySfx("RandomChestSound2");
 
             Vector3 toTarget = _predictedTarget - Core.transform.position;
@@ -123,7 +121,7 @@ namespace Bosses.Chest.States
                 point.y += 2;
 
                 coins[i] = Instantiate(Core.CoinPrefab, point,
-                    Quaternion.Euler(0, Random.Range(0, 360), 0));
+                    Quaternion.Euler(90, Random.Range(0, 360), Random.Range(0, 360)));
 
                 if (Core.BossPhase == Phase.Second)
                 {

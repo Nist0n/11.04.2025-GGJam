@@ -6,7 +6,7 @@ namespace Bosses.Chest.States
     {
         public override void Enter()
         {
-            
+            Core.BossAnimator.Play("Death");
         }
     
         public override void Do()
