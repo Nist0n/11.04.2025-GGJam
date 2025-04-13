@@ -28,8 +28,10 @@ namespace Environment
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.gameObject.name);
             if (other.CompareTag("Player") && _isButtonActive)
             {
+                Debug.Log("Push");
                 _animator.Play("Push");
                 AudioManager.instance.PlaySfx("TileTrap");
                 _isButtonActive = false;
@@ -48,6 +50,7 @@ namespace Environment
             {
                 _isButtonActive = true;
                 _animator.Play("UnPush");
+                Debug.Log("Push");
             }
         }
     }

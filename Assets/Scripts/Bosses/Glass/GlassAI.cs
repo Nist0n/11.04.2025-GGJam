@@ -154,6 +154,7 @@ namespace Bosses.Glass
             if (other.gameObject.CompareTag("Trap"))
             {
                 ReceiveDamage();
+                Destroy(other.gameObject);
             }
         }
 

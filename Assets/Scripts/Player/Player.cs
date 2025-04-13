@@ -21,7 +21,6 @@ namespace Player
         [SerializeField] private float dashCooldown;
         [SerializeField] private AudioSource steps;
         [SerializeField] private AudioSource run;
-        
 
         private const float Gravity = -9.81f;
         
@@ -51,6 +50,11 @@ namespace Player
         
         private void Start()
         {
+            if (PlayerPrefs.HasKey("Sensitivity"))
+            {
+                mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
+            }
+            
             if (GameObject.FindGameObjectWithTag("BossChest"))
             {
                 _chest = GameObject.FindGameObjectWithTag("BossChest").GetComponent<Chest>();
