@@ -21,13 +21,15 @@ namespace Bosses.Glass.BehaviourTree
 
         private int _currentPhase;
         private float _shotYOffset = 0.5f;
+
+        private Animator _animator;
         
         public TaskAttack(Transform transform, Transform playerTransform,
                           float attackInterval, int projectileCount,
                           float waveCooldown, GameObject projectile,
                           float dashSpeed, float dashDuration,
-                          int currentPhase, LaserController laserController
-                          )
+                          int currentPhase, LaserController laserController,
+                          Animator animator)
         {
             _transform = transform;
             _playerTransform = playerTransform;
@@ -37,9 +39,10 @@ namespace Bosses.Glass.BehaviourTree
             _projectile = projectile;
             _currentPhase = currentPhase;
             _laserController = laserController;
+            _animator = animator;
             
             LayerMask wallMask = LayerMask.GetMask("Wall");
-            _dashController = new BossDashController(_transform, wallMask, dashSpeed, dashDuration);
+            _dashController = new BossDashController(_transform, wallMask, dashSpeed, dashDuration, _animator);
         }
 
         public override NodeState Evaluate()
@@ -97,6 +100,7 @@ namespace Bosses.Glass.BehaviourTree
 
         private void ShootWave()
         {
+            // _animator.Play("Attack");
             if (Time.time >= _nextWaveTime && _projectilesFiredInCurrentWave >= _projectileCount)
             {
                 _projectilesFiredInCurrentWave = 0;
@@ -112,6 +116,7 @@ namespace Bosses.Glass.BehaviourTree
                 // Если волна завершена, устанавливаем время для следующей волны
                 if (_projectilesFiredInCurrentWave >= _projectileCount)
                 {
+                    // _animator.StopPlayback();
                     _nextWaveTime = Time.time + _waveCooldown;
                 }
             }
@@ -123,6 +128,7 @@ namespace Bosses.Glass.BehaviourTree
             {
                 return;
             }
+            // _animator.Play("Attack");
             if (Time.time >= _nextWaveTime && _projectilesFiredInCurrentWave >= _projectileCount)
             {
                 _projectilesFiredInCurrentWave = 0;
@@ -138,6 +144,7 @@ namespace Bosses.Glass.BehaviourTree
                 // Если волна завершена, устанавливаем время для следующей волны
                 if (_projectilesFiredInCurrentWave >= _projectileCount)
                 {
+                    // _animator.StopPlayback();
                     _nextWaveTime = Time.time + _waveCooldown;
                 }
             }

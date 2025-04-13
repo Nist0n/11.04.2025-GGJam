@@ -14,12 +14,16 @@ namespace Bosses.Glass
         private float _stateTimer;
         private Vector3 _dashDirection;
         private float _cooldownTimer = 4f;
+        
+        private Animator _animator;
 
-        public BossDashController(Transform boss, LayerMask wallLayer, float dashSpeed, float dashDuration) {
+        public BossDashController(Transform boss, LayerMask wallLayer, float dashSpeed, float dashDuration, Animator animator) 
+        {
             _bossTransform = boss;
             _wallMask = wallLayer;
             _dashSpeed = dashSpeed;
             _dashDuration = dashDuration;
+            _animator = animator;
         }
 
         public void StartDash(Vector3 targetPosition) {
@@ -58,6 +62,7 @@ namespace Bosses.Glass
         }
 
         private void DashMovement() {
+            // _animator.Play("Dash");
             float moveDistance = _dashSpeed * Time.deltaTime;
             
             // Проверяем столкновение со стеной
@@ -78,6 +83,7 @@ namespace Bosses.Glass
             if (_stateTimer <= 0) {
                 CurrentState = DashState.Cooldown;
                 _stateTimer = _cooldownTimer;
+                // _animator.StopPlayback();
             }
         }
 
