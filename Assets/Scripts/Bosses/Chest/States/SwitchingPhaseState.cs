@@ -44,10 +44,7 @@ namespace Bosses.Chest.States
         
         private void ShootProjectile(Vector3 targetPosition)
         {
-            int rand = Random.Range(1, 2);
-
-            if (rand == 1) AudioManager.instance.PlaySfx("CoinDrop1");
-            else AudioManager.instance.PlaySfx("CoinDrop3");
+            AudioManager.instance.PlaySfx("ChestHit");
             
             Vector3 direction = (targetPosition - Core.transform.position).normalized;
             
