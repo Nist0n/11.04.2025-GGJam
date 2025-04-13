@@ -28,6 +28,7 @@ namespace UI
         private void Start()
         {
             AudioManager.instance.PlayMusic("MainMenu");
+            AudioManager.instance.PlayAmbient("AmbientMenu");
             settingsUI.SetActive(false);
         }
 
