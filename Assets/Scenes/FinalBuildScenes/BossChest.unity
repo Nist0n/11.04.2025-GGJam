@@ -1482,10 +1482,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChestBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 5147206418498125715, guid: a0a9f399ae2590742af64d3927672627, type: 3}
-      propertyPath: MaxHealth
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7410866898539058073, guid: a0a9f399ae2590742af64d3927672627, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.04
