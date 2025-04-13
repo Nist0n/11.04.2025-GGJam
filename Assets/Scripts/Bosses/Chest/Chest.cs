@@ -142,7 +142,8 @@ namespace Bosses.Chest
         
         public void ReceiveDamage()
         {
-            Health -= 2;
+            GameEvents.BossDamaged?.Invoke();
+            Health -= 1;
             AudioManager.instance.PlaySfx("ChestHit");
         }
         

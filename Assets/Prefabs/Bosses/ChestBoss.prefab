@@ -292,7 +292,7 @@ MonoBehaviour:
   GroundCheckDistance: 0.2
   GroundCheckPoint: {fileID: 6874752459894951883}
   Health: 0
-  MaxHealth: 10
+  MaxHealth: 15
   IsAttacking: 0
   IsSwitchingPhase: 0
   IdleTimer: 0
