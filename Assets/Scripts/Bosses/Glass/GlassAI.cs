@@ -28,7 +28,6 @@ namespace Bosses.Glass
         [SerializeField] private AudioSource laserSound;
         [SerializeField] private GameObject finalDoor;
         
-        
         private Node _rootNode;
 
         private NavMeshAgent _agent;
@@ -41,6 +40,8 @@ namespace Bosses.Glass
         
         private void Start()
         {
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(directionToPlayer);
             StartCoroutine(Stun());
             StartCoroutine(PlayBattleMusic());
             _rootNode = SetupTree();
@@ -67,7 +68,7 @@ namespace Bosses.Glass
             
             Node root = new Selector();
 
-            LaserController laserController = new LaserController(_transform, rotationSpeed, lineRenderer, _agent);
+            LaserController laserController = new LaserController(_transform, rotationSpeed, lineRenderer, _agent, laserSound);
             
             Node phaseOne = new Sequence(new List<Node>
             {
@@ -76,7 +77,7 @@ namespace Bosses.Glass
                     intervalBetweenShots, projectileCount,
                     waveCooldown, projectile,
                     dashSpeed, dashDuration,
-                    _currentPhase, laserController, animator, laserSound
+                    _currentPhase, laserController, animator
                 )
             });
 
@@ -87,7 +88,7 @@ namespace Bosses.Glass
                     intervalBetweenShots - 0.05f, projectileCount * 2,
                     waveCooldown - 1, projectile,
                     dashSpeed * 1.5f, dashDuration - 0.1f,
-                    _currentPhase, laserController, animator, laserSound
+                    _currentPhase, laserController, animator
                 )
             });
 

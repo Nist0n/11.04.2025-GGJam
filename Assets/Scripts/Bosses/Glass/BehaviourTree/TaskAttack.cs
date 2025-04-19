@@ -12,7 +12,6 @@ namespace Bosses.Glass.BehaviourTree
         private int _projectileCount;
         private float _waveCooldown;
         private GameObject _projectile;
-        private AudioSource _laserSound;
 
         private BossDashController _dashController;
         private LaserController _laserController;
@@ -31,7 +30,7 @@ namespace Bosses.Glass.BehaviourTree
                           float waveCooldown, GameObject projectile,
                           float dashSpeed, float dashDuration,
                           int currentPhase, LaserController laserController,
-                          Animator animator, AudioSource laserSound)
+                          Animator animator)
         {
             _transform = transform;
             _playerTransform = playerTransform;
@@ -42,7 +41,6 @@ namespace Bosses.Glass.BehaviourTree
             _currentPhase = currentPhase;
             _laserController = laserController;
             _animator = animator;
-            _laserSound = laserSound;
             
             LayerMask wallMask = LayerMask.GetMask("Wall");
             _dashController = new BossDashController(_transform, wallMask, dashSpeed, dashDuration, _animator);
@@ -59,22 +57,18 @@ namespace Bosses.Glass.BehaviourTree
             if (r == 0)
             {
                 Charge();
-                _laserSound.enabled = false;
             }
             else if (r == 1)
             {
-                _laserSound.enabled = true;
                 Laser();
             }
             else if (r == 2)
             {
                 ShotgunWave();
-                _laserSound.enabled = false;
             }
             else
             {
                 ShootWave();
-                _laserSound.enabled = false;
             }
             return _state;
         }
@@ -86,7 +80,7 @@ namespace Bosses.Glass.BehaviourTree
                 return;
             }
             
-            if (!_laserController.isLasering())
+            if (!_laserController.IsLasering())
             {
                 _laserController.StartLasering();
             }

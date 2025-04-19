@@ -284,7 +284,7 @@ LineRenderer:
     textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
-    generateLightingData: 0
+    generateLightingData: 1
   m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   avoidDistance: 10
   dashSpeed: 50
   dashDuration: 0.35
-  rotationSpeed: 75
+  rotationSpeed: 120
   animator: {fileID: 1001558478449625538}
   laserSound: {fileID: 5635314014061626373}
   finalDoor: {fileID: 0}

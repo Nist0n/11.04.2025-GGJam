@@ -1,4 +1,5 @@
-﻿using Static_Classes;
+﻿using DG.Tweening;
+using Static_Classes;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,11 +9,10 @@ namespace Bosses.Glass.BehaviourTree
     {
         private Transform _bossTransform;
         private float _rotationSpeed;
-        private float _laserDuration = 5f;
-        private float _prepareTime = 1.5f;
+        private float _prepareTime = 1f;
         private float _cooldownTime = 10f;
-        private float _groundLevel = 1.75f;
-        private float _descentSpeed = 3f;
+        private float _groundLevel = 0.2f;
+        private float _descentSpeed = 0.05f;
 
         private float _currentRotation;
 
@@ -22,13 +22,20 @@ namespace Bosses.Glass.BehaviourTree
         private LineRenderer _lineRenderer;
         private NavMeshAgent _agent;
 
-        public LaserController(Transform bossTransform, float rotationSpeed, LineRenderer lineRenderer, NavMeshAgent agent)
+        private float _laserLength = 50f;
+
+        private AudioSource _laserSound;
+
+        private float _descentDuration = 1.2f;
+        
+        public LaserController(Transform bossTransform, float rotationSpeed, LineRenderer lineRenderer, NavMeshAgent agent, AudioSource laserSound)
         {
             _bossTransform = bossTransform;
             _rotationSpeed = rotationSpeed;
             _lineRenderer = lineRenderer;
             _lineRenderer.enabled = false;
             _agent = agent;
+            _laserSound = laserSound;
         }
 
         public void StartLasering()
@@ -62,20 +69,19 @@ namespace Bosses.Glass.BehaviourTree
 
         private void HandlePreparation()
         {
-            _agent.baseOffset = 0;
+            DOTween.To(() => _agent.baseOffset, x => _agent.baseOffset = x, 0, _descentDuration);
+            
             if (_bossTransform.position.y > _groundLevel + 0.1f)
             {
                 _bossTransform.position -= Vector3.up * (_descentSpeed * Time.deltaTime);
                 return;
             }
-            
+
             _bossTransform.position = new Vector3(
                 _bossTransform.position.x,
                 _groundLevel,
                 _bossTransform.position.z
             );
-            
-            // _bossTransform.forward = _initialForward;
             
             _stateTimer -= Time.deltaTime;
             if (_stateTimer <= 0)
@@ -83,12 +89,14 @@ namespace Bosses.Glass.BehaviourTree
                 CurrentState = LaserState.Lasering;
                 _lineRenderer.enabled = true;
                 _currentRotation = 0f;
-                _stateTimer = 360f / _rotationSpeed;
+                float r = Random.Range(0.5f, 2f);
+                _stateTimer = 360f / _rotationSpeed + r;
             }
         }
 
         private void Laser()
         {
+            _laserSound.enabled = true;
             // lasering
             _agent.isStopped = true;
             float rotationAmount = _rotationSpeed * Time.deltaTime;
@@ -96,48 +104,44 @@ namespace Bosses.Glass.BehaviourTree
             _currentRotation += rotationAmount;
             UpdateLaser();
             
-            if (_currentRotation >= 360f)
-            {
-                CurrentState = LaserState.Cooldown;
-                _stateTimer = _cooldownTime;
-                _lineRenderer.enabled = false;
-                _agent.isStopped = false;
-                _agent.baseOffset = 1.75f;
-            }
-            
             _stateTimer -= Time.deltaTime;
             if (_stateTimer <= 0)
             {
                 CurrentState = LaserState.Cooldown;
                 _stateTimer = _cooldownTime;
+                _lineRenderer.enabled = false;
+                _laserSound.enabled = false;
+                _agent.isStopped = false;
+                DOTween.To(() => _agent.baseOffset, x => _agent.baseOffset = x, 1.75f, _descentDuration);
             }
         }
 
         private void UpdateLaser()
         {
             if (!_lineRenderer.enabled) return;
+            
+            Vector3 laserStartPos = new Vector3(
+                _bossTransform.position.x,
+                _bossTransform.position.y + 0.3f,
+                _bossTransform.position.z
+            );
+            Vector3 laserEnd = _bossTransform.position + _bossTransform.forward * _laserLength;
 
-            float laserLength = 50f;
-            Vector3 laserEnd = _bossTransform.position + _bossTransform.forward * laserLength;
-
-            if (Physics.Raycast(_bossTransform.position, _bossTransform.forward,
-                    out RaycastHit hit, laserLength))
+            if (Physics.Raycast(laserStartPos, _bossTransform.forward,
+                    out RaycastHit hit, _laserLength))
             {
-                if (hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
-                {
-                    laserEnd = hit.point;
-                }
+                // if (hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
+                // {
+                //     laserEnd = hit.point;
+                // }
+                // Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.gameObject.CompareTag("Player"))
                 {
                     GameEvents.PlayerDeath?.Invoke();
                 }
             }
 
-            Vector3 laserStartPos = new Vector3(
-                _bossTransform.position.x,
-                _bossTransform.position.y + 0.3f,
-                _bossTransform.position.z
-            );
+            
             _lineRenderer.SetPosition(0, laserStartPos);
             _lineRenderer.SetPosition(1, laserEnd);
         }
@@ -151,7 +155,7 @@ namespace Bosses.Glass.BehaviourTree
             }
         }
         
-        public bool isLasering()
+        public bool IsLasering()
         {
             return CurrentState != LaserState.Ready;
         }

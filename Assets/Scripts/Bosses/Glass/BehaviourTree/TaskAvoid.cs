@@ -31,7 +31,7 @@ namespace Bosses.Glass.BehaviourTree
             _agent.SetDestination(_targetTransform.position);
             
             Vector3 directionToPlayer = _playerTransform.position - _transform.position;
-            if (_laserController.CurrentState != LaserState.Lasering)
+            if (_laserController.CurrentState != LaserState.Lasering && _laserController.CurrentState != LaserState.Preparing)
             {
                 _transform.rotation = Quaternion.LookRotation(directionToPlayer);
             }

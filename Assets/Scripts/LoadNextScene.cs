@@ -1,9 +1,6 @@
-using System;
-using System.Runtime.CompilerServices;
 using GameControl;
 using Settings.Audio;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoadNextScene : MonoBehaviour
 {
@@ -21,6 +18,10 @@ public class LoadNextScene : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             AudioManager.instance.PlaySfx("OpenDoor");
+            if (PlayerPrefs.HasKey("SecondPhaseStart"))
+            {
+                PlayerPrefs.SetInt("SecondPhaseStart", 0);
+            }
             _fader.LoadScene(nameOfScene);
         }
     }

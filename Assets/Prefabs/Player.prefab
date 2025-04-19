@@ -57,7 +57,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -701,7 +701,7 @@ MonoBehaviour:
   walkSpeed: 5
   mouseSensitivity: 10
   jumpForce: 6
-  sprintMultiplier: 1.5
+  sprintMultiplier: 2
   dashSpeed: 30
   dashTime: 0.25
   dashCooldown: 2

@@ -60,7 +60,7 @@ namespace Bosses.Chest
             Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
             Quaternion newRotation = Quaternion.Slerp(Rb.rotation, targetRotation, 5 * Time.fixedDeltaTime);
             
-            Rb.MoveRotation(newRotation); 
+            Rb.MoveRotation(newRotation);
             
             CheckNextAttackTimer();
 
